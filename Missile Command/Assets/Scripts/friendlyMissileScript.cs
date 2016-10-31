@@ -21,6 +21,11 @@ public class friendlyMissileScript : MonoBehaviour {
         friendlyExplosion.transform.localPosition = explosionPosition;
         friendlyExplosion.SetActive(false);
 
+        if (friendlyExplosion.GetComponent<ExplosionScript>() == null)
+        {
+            friendlyExplosion.AddComponent<ExplosionScript>();
+        }
+
     }
 	
 	// Update is called once per frame
