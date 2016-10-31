@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\MouseControls.cs" />
      <Compile Include="Assets\Scripts\SpawnfriendlyMissile.cs" />
      <Compile Include="Assets\Scripts\friendlyMissileScript.cs" />
  <Reference Include="UnityEngine.UI">

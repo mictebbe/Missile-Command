@@ -4,7 +4,7 @@ using System.Collections;
 public class SpawnfriendlyMissile : MonoBehaviour {
     public GameObject missilePrefab;
     public int amount;
-
+    public GameObject cursor;
     private ArrayList missiles = new ArrayList();    private int currentAmount = 0;
 
     // Use this for initialization
@@ -18,6 +18,7 @@ public class SpawnfriendlyMissile : MonoBehaviour {
             if (temp.GetComponent<friendlyMissileScript>() == null)
             {
                 temp.AddComponent<friendlyMissileScript>();            }
+            
 
             currentAmount++;
         }
@@ -27,10 +28,10 @@ public class SpawnfriendlyMissile : MonoBehaviour {
 	void Update () {
 
 
-            if (Time.frameCount % 30 == 0 && currentAmount > 0)
+            if (Input.GetMouseButtonDown(0) && currentAmount > 0)
             {
                 GameObject current = (GameObject)missiles[currentAmount-1];
-
+            current.GetComponent<friendlyMissileScript>().cursor = cursor;
                 current.SetActive(true);
 
                 currentAmount--;
