@@ -5,8 +5,9 @@ public class SpawnfriendlyMissile : MonoBehaviour {
     public GameObject missilePrefab;
     public int amount;
     public GameObject cursor;
+    public GameObject friendlyMissileExplosion;
     private ArrayList missiles = new ArrayList();    private int currentAmount = 0;
-
+    
     // Use this for initialization
     void Start()
     {
@@ -19,6 +20,7 @@ public class SpawnfriendlyMissile : MonoBehaviour {
             {
                 temp.AddComponent<friendlyMissileScript>();            }
             
+            
 
             currentAmount++;
         }
@@ -28,14 +30,20 @@ public class SpawnfriendlyMissile : MonoBehaviour {
 	void Update () {
 
 
-            if (Input.GetMouseButtonDown(0) && currentAmount > 0)
+            if (Input.GetMouseButtonDown(0) )
             {
-                GameObject current = (GameObject)missiles[currentAmount-1];
-            current.GetComponent<friendlyMissileScript>().cursor = cursor;
+            if (currentAmount > 0)
+            {
+                GameObject current = (GameObject)missiles[currentAmount - 1];
+                current.GetComponent<friendlyMissileScript>().cursor = cursor;
+                current.GetComponent<friendlyMissileScript>().friendlyExplosionPrefab = friendlyMissileExplosion;
                 current.SetActive(true);
 
                 currentAmount--;
-
+            }else
+            {
+                Debug.Log("No missiles left in Missile Launcher '" + gameObject.name+"'");
+            }
             }
         }
 }
