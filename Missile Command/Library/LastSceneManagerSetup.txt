@@ -1,0 +1,4 @@
+sceneSetups:
+- path: "C:/Users/Public/Documents/Unity Projects/\xDCbung 2/Assets/Scenes/\xFCbung2.unity"
+  isLoaded: 1
+  isActive: 1
