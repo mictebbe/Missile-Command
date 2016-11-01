@@ -4,6 +4,7 @@ using System.Collections;
 public class SpawnfriendlyMissile : MonoBehaviour {
     public GameObject missilePrefab;
     public int amount;
+    public float speed=1;
     public GameObject cursor;
     public GameObject friendlyMissileExplosion;
     private ArrayList missiles = new ArrayList();    private int currentAmount = 0;
@@ -12,7 +13,7 @@ public class SpawnfriendlyMissile : MonoBehaviour {
     void Start()
     {
         for (int i = 0; i < amount; i++)
-        {            GameObject temp = Instantiate(missilePrefab) as GameObject;            temp.transform.localScale = new Vector3(1, 1, 1);            temp.transform.parent = transform;            temp.SetActive(false);            //temp.GetComponent<Renderer>().material.color = Random.ColorHSV();
+        {            GameObject temp = Instantiate(missilePrefab) as GameObject;            temp.transform.localScale = new Vector3(1, 1, 1);            //temp.transform.parent = transform;            temp.SetActive(false);            //temp.GetComponent<Renderer>().material.color = Random.ColorHSV();
 
             missiles.Add(temp);
 
@@ -36,7 +37,9 @@ public class SpawnfriendlyMissile : MonoBehaviour {
             {
                 GameObject current = (GameObject)missiles[currentAmount - 1];
                 current.GetComponent<friendlyMissileScript>().cursor = cursor;
+                current.GetComponent<friendlyMissileScript>().speed = speed;
                 current.GetComponent<friendlyMissileScript>().friendlyExplosionPrefab = friendlyMissileExplosion;
+                current.transform.Translate(gameObject.transform.localPosition);
                 current.SetActive(true);
 
                 currentAmount--;

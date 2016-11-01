@@ -45,12 +45,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\ExplosionScript.cs" />
-     <Compile Include="Assets\Scripts\MouseControls.cs" />
-     <Compile Include="Assets\Scripts\SpawnEnemyMissile.cs" />
-     <Compile Include="Assets\Scripts\SpawnfriendlyMissile.cs" />
-     <Compile Include="Assets\Scripts\enemyMissileScript.cs" />
-     <Compile Include="Assets\Scripts\friendlyMissileScript.cs" />
+     <Compile Include="Assets\Scripts\DollyZoom.cs" />
+     <Compile Include="Assets\Scripts\Game\ChangeEnemyTargetAndPosition.cs" />
+     <Compile Include="Assets\Scripts\Game\DestroyCity.cs" />
+     <Compile Include="Assets\Scripts\Game\DestroyMissileSpawner.cs" />
+     <Compile Include="Assets\Scripts\Game\ExplodeOnGround.cs" />
+     <Compile Include="Assets\Scripts\Game\ExplosionCollision.cs" />
+     <Compile Include="Assets\Scripts\Game\ExplosionScript.cs" />
+     <Compile Include="Assets\Scripts\Game\MainGameScript.cs" />
+     <Compile Include="Assets\Scripts\Game\MouseControls.cs" />
+     <Compile Include="Assets\Scripts\Game\SpawnCities.cs" />
+     <Compile Include="Assets\Scripts\Game\SpawnEnemyMissile.cs" />
+     <Compile Include="Assets\Scripts\Game\SpawnfriendlyMissile.cs" />
+     <Compile Include="Assets\Scripts\Game\enemyMissileScript.cs" />
+     <Compile Include="Assets\Scripts\Game\friendlyMissileScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
