@@ -78,6 +78,11 @@
     <Compile Include="Assets\Scripts\Game\enemyMissileScript.cs" />
     <Compile Include="Assets\Scripts\Game\friendlyMissileScript.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Addons\NaturalTilingTextures\External\ShaderForge_NTT_Triplanar.shader" />
+    <None Include="Assets\Addons\Palm Trees\Shaders\WavingDoublePassCullBackface.shader" />
+    <None Include="Assets\Addons\Palm Trees\Shaders\WavingDoublePassNoCullBackface.shader" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
 </Project>
