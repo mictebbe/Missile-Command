@@ -13,7 +13,7 @@ public class enemyMissileScript : MonoBehaviour {
     {
         if (explosionPosition != null)
         {
-            explosionPosition = target.transform.localPosition;
+            explosionPosition = target.transform.position;
 
         }
         

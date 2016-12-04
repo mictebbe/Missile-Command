@@ -12,15 +12,15 @@ public class friendlyMissileScript : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        explosionPosition = cursor.transform.localPosition;
-        direction = Vector3.Normalize(explosionPosition- gameObject.transform.localPosition);
+        explosionPosition = cursor.transform.position;
+        direction = Vector3.Normalize(explosionPosition- gameObject.transform.position);
 
         Debug.Log("Explosion position: "+explosionPosition);
         Debug.Log("Direction: " + direction);
 
         friendlyExplosion = Instantiate(friendlyExplosionPrefab) as GameObject;
         //friendlyExplosion.transform.localScale = new Vector3(1, 1, 1);
-        friendlyExplosion.transform.localPosition = explosionPosition;
+        friendlyExplosion.transform.position = explosionPosition;
         friendlyExplosion.SetActive(false);
 
         if (friendlyExplosion.GetComponent<ExplosionScript>() == null)
@@ -35,7 +35,7 @@ public class friendlyMissileScript : MonoBehaviour {
         
         
         gameObject.transform.Translate(direction*speed);
-        if (Vector3.Magnitude(gameObject.transform.localPosition-explosionPosition)<=2*speed)
+        if (Vector3.Magnitude(gameObject.transform.position-explosionPosition)<=2*speed)
         {
            
             Debug.Log("Friendly Missile explodes.");

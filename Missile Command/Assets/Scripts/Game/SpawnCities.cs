@@ -6,7 +6,7 @@ public class SpawnCities : MonoBehaviour {
     public GameObject City;
     public GameObject MissileSpawner;
     public GameObject Cursor;
-    public float positionOffsetX = 10;
+    public float positionOffsetX = 100;
     // Use this for initialization
     void Start()
     {

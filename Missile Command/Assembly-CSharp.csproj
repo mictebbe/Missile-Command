@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\Game\SpawnfriendlyMissile.cs" />
      <Compile Include="Assets\Scripts\Game\enemyMissileScript.cs" />
      <Compile Include="Assets\Scripts\Game\friendlyMissileScript.cs" />
+     <None Include="Assets\NaturalTilingTextures\External\ShaderForge_NTT_Triplanar.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

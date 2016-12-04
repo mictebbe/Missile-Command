@@ -13,7 +13,10 @@ public class SpawnfriendlyMissile : MonoBehaviour {
     void Start()
     {
         for (int i = 0; i < amount; i++)
-        {            GameObject temp = Instantiate(missilePrefab) as GameObject;            temp.transform.localScale = new Vector3(1, 1, 1);            //temp.transform.parent = transform;            temp.SetActive(false);            //temp.GetComponent<Renderer>().material.color = Random.ColorHSV();
+        {            GameObject temp = Instantiate(missilePrefab) as GameObject;
+            //temp.transform.localScale = new Vector3(1, 1, 1);
+            //temp.transform.parent = transform;
+            temp.transform.position = gameObject.transform.position;            temp.SetActive(false);            //temp.GetComponent<Renderer>().material.color = Random.ColorHSV();
 
             missiles.Add(temp);
 
@@ -39,7 +42,7 @@ public class SpawnfriendlyMissile : MonoBehaviour {
                 current.GetComponent<friendlyMissileScript>().cursor = cursor;
                 current.GetComponent<friendlyMissileScript>().speed = speed;
                 current.GetComponent<friendlyMissileScript>().friendlyExplosionPrefab = friendlyMissileExplosion;
-                current.transform.Translate(gameObject.transform.localPosition);
+                current.transform.Translate(gameObject.transform.position);
                 current.SetActive(true);
 
                 currentAmount--;
