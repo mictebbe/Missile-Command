@@ -16,7 +16,7 @@ public class SpawnfriendlyMissile : MonoBehaviour {
         {            GameObject temp = Instantiate(missilePrefab) as GameObject;
             //temp.transform.localScale = new Vector3(1, 1, 1);
             //temp.transform.parent = transform;
-            temp.transform.position = gameObject.transform.position;            temp.SetActive(false);            //temp.GetComponent<Renderer>().material.color = Random.ColorHSV();
+            temp.transform.position = new Vector3(0, 0, 0);//gameObject.transform.position;            temp.SetActive(false);            //temp.GetComponent<Renderer>().material.color = Random.ColorHSV();
 
             missiles.Add(temp);
 

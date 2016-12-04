@@ -12,9 +12,10 @@ public class MouseControls : MonoBehaviour {
 
     void Update()
     {
-        //Vector2 mousePosition = Input.mousePosition;
-        //Ray ray = cam.ScreenPointToRay(new Vector3(mousePosition.x, mousePosition.y, 100));
+        Vector2 mousePosition = Input.mousePosition;
+        Ray ray = cam.ScreenPointToRay(new Vector3(mousePosition.x, mousePosition.y, 100));
         
-        cursor.transform.Translate(new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"), 0));
+        //cursor.transform.Translate(ray
+        cursor.transform.Translate(new Vector3(Input.GetAxis("Mouse X")*10, Input.GetAxis("Mouse Y")*10, 0));
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class ExplosionCollision : MonoBehaviour {
-    public float maxExplosionCollision=5;
+    public float maxExplosionCollision=30;
 
 
     void OnTriggerEnter(Collider other)
@@ -24,7 +24,7 @@ public class ExplosionCollision : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        gameObject.GetComponent<SphereCollider>().radius += 0.05f;
+        gameObject.GetComponent<SphereCollider>().radius += 0.5f;
         if ( gameObject.GetComponent<SphereCollider>() != null)
           {
 

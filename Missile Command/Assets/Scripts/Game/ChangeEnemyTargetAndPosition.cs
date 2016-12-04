@@ -24,7 +24,7 @@ public class ChangeEnemyTargetAndPosition : MonoBehaviour {
 
     public void changePosition()
     {
-        gameObject.transform.localPosition.Set(Random.Range(-10, 10), Random.Range(10, 15), 0);
+        gameObject.transform.position.Set(Random.Range(-10, 10), Random.Range(10, 15), 0);
 
     }
 
