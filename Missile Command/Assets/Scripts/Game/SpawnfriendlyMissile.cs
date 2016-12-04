@@ -7,7 +7,7 @@ public class SpawnfriendlyMissile : MonoBehaviour {
     public float speed=1;
     public GameObject cursor;
     public GameObject friendlyMissileExplosion;
-    public int buttonName = 0;
+    public UnityEngine.KeyCode buttonNumber = KeyCode.A;
     private ArrayList missiles = new ArrayList();    private int currentAmount = 0;
     
     // Use this for initialization
@@ -35,7 +35,7 @@ public class SpawnfriendlyMissile : MonoBehaviour {
 	void Update () {
 
         
-            if (Input.GetButtonDown(buttonName) )
+            if (Input.GetKeyDown(buttonNumber))
             {
             if (currentAmount > 0)
             {

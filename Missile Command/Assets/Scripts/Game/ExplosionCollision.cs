@@ -3,7 +3,8 @@ using System.Collections;
 
 public class ExplosionCollision : MonoBehaviour {
     public float maxExplosionCollision=30;
-
+    public float grothAndShrinkRate = 1;
+    private bool growing = true;
 
     void OnTriggerEnter(Collider other)
     {
@@ -19,26 +20,44 @@ public class ExplosionCollision : MonoBehaviour {
     // Use this for initialization
     void Start () {
         
-        //gameObject.GetComponent<MeshCollider>().GetComponent<Mesh>().bounds.Expand(1);
+        
     }
 	
 	// Update is called once per frame
 	void Update () {
-        gameObject.GetComponent<SphereCollider>().radius += 0.5f;
+
+
+
+       // gameObject.GetComponent<SphereCollider>().radius += 2f;
         if ( gameObject.GetComponent<SphereCollider>() != null)
           {
 
             
 
-            if (gameObject.GetComponent<SphereCollider>().radius >= maxExplosionCollision)
-              {
-                Destroy(gameObject);
-              }
-              else
-              {
-                gameObject.GetComponent<SphereCollider>().radius += 0.05f;
+      
+            if (growing)
+            {
+                gameObject.GetComponent<SphereCollider>().radius += grothAndShrinkRate;
+                Debug.Log("growing"+ gameObject.GetComponent<SphereCollider>().radius);
 
+            }else{
+                gameObject.GetComponent<SphereCollider>().radius -= grothAndShrinkRate;
+                Debug.Log("shrinking "+ gameObject.GetComponent<SphereCollider>().radius);
             }
+
+            if (gameObject.GetComponent<SphereCollider>().radius >= maxExplosionCollision)
+            {
+                growing = false;
+                Debug.Log("growing is false");
+            }
+
+            if (gameObject.GetComponent<SphereCollider>().radius <= 0)
+            {
+                Debug.Log("dead" + gameObject.GetComponent<SphereCollider>().radius);
+                Destroy(gameObject);
+                
+            }
+
           }
           
 
