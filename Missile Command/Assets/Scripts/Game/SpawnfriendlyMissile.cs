@@ -7,6 +7,7 @@ public class SpawnfriendlyMissile : MonoBehaviour {
     public float speed=1;
     public GameObject cursor;
     public GameObject friendlyMissileExplosion;
+    public int buttonName = 0;
     private ArrayList missiles = new ArrayList();    private int currentAmount = 0;
     
     // Use this for initialization
@@ -33,8 +34,8 @@ public class SpawnfriendlyMissile : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
-            if (Input.GetMouseButtonDown(0) )
+        
+            if (Input.GetButtonDown(buttonName) )
             {
             if (currentAmount > 0)
             {
