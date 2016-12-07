@@ -33,7 +33,7 @@ public class LevelGUI : MonoBehaviour {
         {
             print("Moving to level 2");
             GameManager.Instance.addLevel();
-            GameManager.Instance.levelGenerator.generateLevel(1);
+           GameManager.Instance.levelGenerator.generateLevel(1);
 
         }
     }
