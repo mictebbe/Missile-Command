@@ -38,22 +38,22 @@ public class ExplosionCollision : MonoBehaviour {
             if (growing)
             {
                 gameObject.GetComponent<SphereCollider>().radius += grothAndShrinkRate;
-                Debug.Log("growing"+ gameObject.GetComponent<SphereCollider>().radius);
+              //  Debug.Log("growing"+ gameObject.GetComponent<SphereCollider>().radius);
 
             }else{
                 gameObject.GetComponent<SphereCollider>().radius -= grothAndShrinkRate;
-                Debug.Log("shrinking "+ gameObject.GetComponent<SphereCollider>().radius);
+              //  Debug.Log("shrinking "+ gameObject.GetComponent<SphereCollider>().radius);
             }
 
             if (gameObject.GetComponent<SphereCollider>().radius >= maxExplosionCollision)
             {
                 growing = false;
-                Debug.Log("growing is false");
+               // Debug.Log("growing is false");
             }
 
             if (gameObject.GetComponent<SphereCollider>().radius <= 0)
             {
-                Debug.Log("dead" + gameObject.GetComponent<SphereCollider>().radius);
+               // Debug.Log("dead" + gameObject.GetComponent<SphereCollider>().radius);
                 Destroy(gameObject);
                 
             }

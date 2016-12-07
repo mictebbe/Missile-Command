@@ -19,8 +19,15 @@ public class DestroyCity : MonoBehaviour {
     void Explode()
     {
         GameManager.Instance.destroyCity(gameObject);
+        if (GameManager.Instance.isDestroyed())
+        {
+            LevelGenerator.Instance.showEndScreen();
+
+        }
         Debug.Log("City destroyed! "+ gameObject.name);
         Destroy(gameObject);
+
+
 
     }
     // Use this for initialization

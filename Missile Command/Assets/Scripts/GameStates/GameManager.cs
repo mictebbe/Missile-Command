@@ -165,11 +165,7 @@ public class GameManager : MonoBehaviour {
 
     public void update()
     {
-
-        if (isDestroyed())
-        {
-            LevelGenerator.Instance.showEndScreen();
-
-        }
+        
+        
     }
 }
