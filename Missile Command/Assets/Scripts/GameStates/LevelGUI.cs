@@ -22,18 +22,19 @@ public class LevelGUI : MonoBehaviour {
     void OnGUI()
     {
         // Create buttons to move between level 1 and level 2
-        if (GUI.Button(new Rect(30, 30, 150, 30), "Load next Level"))
+        if (GUI.Button(new Rect(30, 30, 150, 30), "Back to Main Menu"))
         {
-            GameManager.instance.addLevel();
-            Application.LoadLevel("level1");
-            
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Gamestart");
+
+
         }
 
-        if (GUI.Button(new Rect(300, 30, 150, 30), "Load Start screen"))
+        if (GUI.Button(new Rect(300, 30, 150, 30), "Next Level"))
         {
             print("Moving to level 2");
-            //gamestate.Instance.setLevel("Level 2");
-           // Application.LoadLevel("level2");
+            GameManager.Instance.addLevel();
+            GameManager.Instance.levelGenerator.generateLevel(1);
+
         }
     }
 

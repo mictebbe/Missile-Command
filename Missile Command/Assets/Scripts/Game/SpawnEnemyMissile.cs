@@ -13,8 +13,11 @@ public class SpawnEnemyMissile : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+
+
         mainGame = GameObject.Find("MainGameScript");
         Debug.Log(mainGame);
+        this.speed = GameManager.Instance.getLevel();
         for (int i = 0; i < amount; i++)
         {            GameObject temp = Instantiate(enemyMissilePrefab) as GameObject;            //temp.transform.localScale = new Vector3(1, 1, 1);            //temp.transform.parent = transform;            temp.SetActive(false);            
 

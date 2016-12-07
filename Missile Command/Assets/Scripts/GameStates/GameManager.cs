@@ -5,7 +5,7 @@ public class GameManager : MonoBehaviour {
 
     // Declare properties
     public static GameManager instance;
-    private LevelGenerator levelGenerator;
+    public LevelGenerator levelGenerator;
 
     // Declare properties
     private int activeLevel;         // Active level
@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour {
     private bool City4Destroyed;                  // is city 4 destroyed?
     private bool City5Destroyed;                  // is city 5 destroyed?
     private bool City6Destroyed;                  // is city 6 destroyed?
-
+    
 
     // Creates an instance of gamestate as a gameobject if an instance does not exist
     // ---------------------------------------------------------------------------------------------------
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
     void Awake()
     {
         //Check if instance already exists
-        if (instance == null)
+      /*  if (instance == null)
 
             //if not, set instance to this
             instance = this;
@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
 
         //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);*/
 
         //Get a component reference to the attached BoardManager script
         levelGenerator = new GameObject("levelGenerator").AddComponent<LevelGenerator>(); ;
@@ -63,8 +63,9 @@ public class GameManager : MonoBehaviour {
     //Initializes the game for each level.
     void initLevel()
     {
+        
         //Call the SetupScene function of the BoardManager script, pass it current level number.
-       levelGenerator.generateLevel(this.activeLevel);
+        levelGenerator.generateLevel(this.activeLevel);
 
     }
 

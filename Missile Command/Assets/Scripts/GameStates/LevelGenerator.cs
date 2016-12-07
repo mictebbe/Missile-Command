@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class LevelGenerator : MonoBehaviour {
@@ -28,8 +29,10 @@ public class LevelGenerator : MonoBehaviour {
 
     public void generateLevel(int lvl)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Level1");
-
+        SceneManager.LoadScene("Level1");
+        // GameObject[] scene=SceneManager.GetSceneByName("Level1").GetRootGameObjects();
+        //Debug.Log("adsjk");
+        //Debug.Log(SceneManager.GetSceneByName("Level1").GetRootGameObjects());
 
     }
 }
