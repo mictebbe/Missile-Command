@@ -6,10 +6,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{86A6C2EA-DC30-6791-ED87-738E4039FB0F}</ProjectGuid>
+    <ProjectGuid>{247DAE3B-F81B-AA47-FAB5-8AF9470AFA92}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-firstpass</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -45,26 +45,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Fx Explosion Pack\Script\DestroyEffect.cs" />
-     <Compile Include="Assets\Fx Explosion Pack\Script\csLightControl.cs" />
-     <Compile Include="Assets\Scripts\DollyZoom.cs" />
-     <Compile Include="Assets\Scripts\Game\ChangeEnemyTargetAndPosition.cs" />
-     <Compile Include="Assets\Scripts\Game\DestroyCity.cs" />
-     <Compile Include="Assets\Scripts\Game\DestroyMissileSpawner.cs" />
-     <Compile Include="Assets\Scripts\Game\ExplodeOnGround.cs" />
-     <Compile Include="Assets\Scripts\Game\ExplosionCollision.cs" />
-     <Compile Include="Assets\Scripts\Game\ExplosionScript.cs" />
-     <Compile Include="Assets\Scripts\Game\MainGameScript.cs" />
-     <Compile Include="Assets\Scripts\Game\MouseControls.cs" />
-     <Compile Include="Assets\Scripts\Game\SpawnCities.cs" />
-     <Compile Include="Assets\Scripts\Game\SpawnEnemyMissile.cs" />
-     <Compile Include="Assets\Scripts\Game\SpawnfriendlyMissile.cs" />
-     <Compile Include="Assets\Scripts\Game\enemyMissileScript.cs" />
-     <Compile Include="Assets\Scripts\Game\friendlyMissileScript.cs" />
-     <Compile Include="Assets\Scripts\GameStates\GameManager.cs" />
-     <Compile Include="Assets\Scripts\GameStates\LevelGUI.cs" />
-     <Compile Include="Assets\Scripts\GameStates\LevelGenerator.cs" />
-     <Compile Include="Assets\Scripts\GameStates\StartScreenGui.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\BlurEffect.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\ColorCorrectionEffect.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\ContrastStretchEffect.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\EdgeDetectEffect.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\GlowEffect.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\GrayscaleEffect.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\ImageEffectBase.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\ImageEffects.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\MotionBlur.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\NoiseEffect.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\SSAOEffect.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\SepiaToneEffect.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\TwirlEffect.cs" />
+     <Compile Include="Assets\Standard Assets\Image Effects (Pro Only)\VortexEffect.cs" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
@@ -124,19 +118,12 @@
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAA3Console.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\EdgeDetectX.shader" />
      <None Include="Assets\Standard Assets\Image Effects (Pro Only)\_Sources\Shaders\_Antialiasing\FXAAPreset2.shader" />
- <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>C:/Users/Michael/Uni/ws16-17/Game Engine Architecture/MissileCommand/Missile Command/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{247DAE3B-F81B-AA47-FAB5-8AF9470AFA92}</Project>      <Name>Assembly-CSharp-firstpass</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
