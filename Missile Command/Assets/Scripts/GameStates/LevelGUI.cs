@@ -31,9 +31,10 @@ public class LevelGUI : MonoBehaviour {
 
         if (GUI.Button(new Rect(300, 30, 150, 30), "Next Level"))
         {
-            print("Moving to level 2");
+            print("Moving from level "+GameManager.Instance.getLevel());
             GameManager.Instance.addLevel();
-           GameManager.Instance.levelGenerator.generateLevel(1);
+            print("Moving to level " + GameManager.Instance.getLevel());
+            GameManager.Instance.initLevel();
 
         }
     }

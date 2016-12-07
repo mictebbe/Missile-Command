@@ -16,9 +16,9 @@ public class SpawnEnemyMissile : MonoBehaviour {
 
 
         mainGame = GameObject.Find("MainGameScript");
-        Debug.Log(mainGame);
-        this.speed = GameManager.Instance.getLevel();
-        for (int i = 0; i < amount; i++)
+        
+        this.speed = GameManager.Instance.getLevel()*0.6f;
+        for (int i = 0; i <= amount; i++)
         {            GameObject temp = Instantiate(enemyMissilePrefab) as GameObject;            //temp.transform.localScale = new Vector3(1, 1, 1);            //temp.transform.parent = transform;            temp.SetActive(false);            
 
             missiles.Add(temp);
@@ -42,7 +42,7 @@ public class SpawnEnemyMissile : MonoBehaviour {
         }
 
         //TODO Spawn Missiles differently
-        if (Time.frameCount%100==0 && mainGame.GetComponent<MainGameScript>().gameRunning)
+        if (Time.frameCount%60==0 && !GameManager.Instance.isDestroyed())
         {
             if (currentAmount > 0)
             {
@@ -61,7 +61,9 @@ public class SpawnEnemyMissile : MonoBehaviour {
                 current.GetComponent<enemyMissileScript>().speed= speed;
                 current.SetActive(true);
                 current.transform.Translate(gameObject.transform.localPosition);
-                currentAmount--;
+                currentAmount-=1;
+             
+
             }
             else
             {

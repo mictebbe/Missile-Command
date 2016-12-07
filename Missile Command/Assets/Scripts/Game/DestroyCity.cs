@@ -6,7 +6,7 @@ public class DestroyCity : MonoBehaviour {
     
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("City destroyed!");
+       
        
         if (other.gameObject.GetComponent<enemyMissileScript>() != null)
         {
@@ -18,6 +18,8 @@ public class DestroyCity : MonoBehaviour {
 
     void Explode()
     {
+        GameManager.Instance.destroyCity(gameObject);
+        Debug.Log("City destroyed! "+ gameObject.name);
         Destroy(gameObject);
 
     }

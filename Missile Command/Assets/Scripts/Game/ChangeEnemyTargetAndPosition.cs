@@ -48,9 +48,9 @@ public class ChangeEnemyTargetAndPosition : MonoBehaviour {
        if( Targets.Contains(target)){
             Targets.Remove(target);
 
-        }else if(Targets.Count==0 && GameObject.Find("MainGameScript")!=null)
+        }else if(Targets.Count==0 )
         {
-            GameObject.Find("MainGameScript").GetComponent<MainGameScript>().gameRunning = false;
+            Debug.Log("GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER ");
 
         }
 
@@ -76,6 +76,7 @@ public class ChangeEnemyTargetAndPosition : MonoBehaviour {
         if (Time.frameCount % 160 == 0)
         {
             changePosition();
+            changeTarget();
 
         }
 	}

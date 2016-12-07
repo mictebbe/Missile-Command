@@ -5,18 +5,18 @@ public class GameManager : MonoBehaviour {
 
     // Declare properties
     public static GameManager instance;
-    public LevelGenerator levelGenerator;
+    
 
     // Declare properties
     private int activeLevel;         // Active level
    
     private int score;                  // Score
-    private bool City1Destroyed;                  // is city 1 destroyed?
-    private bool City2Destroyed;                  // is city 2 destroyed?
-    private bool City3Destroyed;                  // is city 3 destroyed?
-    private bool City4Destroyed;                  // is city 4 destroyed?
-    private bool City5Destroyed;                  // is city 5 destroyed?
-    private bool City6Destroyed;                  // is city 6 destroyed?
+    private bool CityDestroyed1;                  // is city 1 destroyed?
+    private bool CityDestroyed2;                  // is city 2 destroyed?
+    private bool CityDestroyed3;                  // is city 3 destroyed?
+    private bool CityDestroyed4;                  // is city 4 destroyed?
+    private bool CityDestroyed5;                  // is city 5 destroyed?
+    private bool CityDestroyed6;                  // is city 6 destroyed?
     
 
     // Creates an instance of gamestate as a gameobject if an instance does not exist
@@ -39,33 +39,32 @@ public class GameManager : MonoBehaviour {
     void Awake()
     {
         //Check if instance already exists
-      /*  if (instance == null)
+          if (instance == null)
 
-            //if not, set instance to this
-            instance = this;
+              //if not, set instance to this
+              instance = this;
 
-        //If instance already exists and it's not this:
-        else if (instance != this)
+          //If instance already exists and it's not this:
+          else if (instance != this)
 
-            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
-            Destroy(gameObject);
+              //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+              Destroy(gameObject);
 
-        //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);*/
+          //Sets this to not be destroyed when reloading scene
+          DontDestroyOnLoad(gameObject);
 
-        //Get a component reference to the attached BoardManager script
-        levelGenerator = new GameObject("levelGenerator").AddComponent<LevelGenerator>(); ;
+        
 
         //Call the InitGame function to initialize the first level 
-        startState();
+        //startState();
     }
 
     //Initializes the game for each level.
-    void initLevel()
+    public void initLevel()
     {
-        
+
         //Call the SetupScene function of the BoardManager script, pass it current level number.
-        levelGenerator.generateLevel(this.activeLevel);
+        LevelGenerator.Instance.generateLevel(this.activeLevel);
 
     }
 
@@ -92,15 +91,15 @@ public class GameManager : MonoBehaviour {
          activeLevel=1;         // Active level
     
     score=0;                  // Score
-    
-    City1Destroyed=false;                  // is city 1 destroyd?
-    City2Destroyed = false;                  // is city 2 destroyd?
-    City3Destroyed = false;                  // is city 3 destroyd?
-    City4Destroyed = false;                  // is city 4 destroyd?
-    City5Destroyed = false;                  // is city 5 destroyd?
-    City6Destroyed = false;                  // is city 6 destroyd?
 
-        initLevel();
+        CityDestroyed1 = false;                  // is city 1 destroyd?
+        CityDestroyed2 = false;                  // is city 2 destroyd?
+        CityDestroyed3 = false;                  // is city 3 destroyd?
+        CityDestroyed4 = false;                  // is city 4 destroyd?
+        CityDestroyed5 = false;                  // is city 5 destroyd?
+        CityDestroyed6 = false;                  // is city 6 destroyd?
+
+       
 }
 
     public int getLevel()
@@ -114,5 +113,63 @@ public class GameManager : MonoBehaviour {
 
         this.activeLevel++;
 
+    }
+
+
+    public bool isDestroyed()
+    {
+
+        return (CityDestroyed1 && CityDestroyed2 && CityDestroyed3 && CityDestroyed4 && CityDestroyed5 && CityDestroyed6 );
+    }
+
+    public void destroyCity(GameObject cityToDestroy)
+    {
+
+        Debug.Log("DESTROYCITY " + cityToDestroy.name);
+        switch (cityToDestroy.name)
+        {
+            case "City1":
+                this.CityDestroyed1 = true;
+
+                break;
+
+            case "City2":
+                this.CityDestroyed2 = true;
+
+                break;
+
+            case "City3":
+                this.CityDestroyed3 = true;
+
+                break;
+
+            case "City4":
+                this.CityDestroyed4 = true;
+
+                break;
+
+            case "City5":
+                this.CityDestroyed5 = true;
+
+                break;
+
+            case "City6":
+                this.CityDestroyed6 = true;
+
+                break;
+
+
+        }
+
+    }
+
+    public void update()
+    {
+
+        if (isDestroyed())
+        {
+            LevelGenerator.Instance.showEndScreen();
+
+        }
     }
 }

@@ -29,10 +29,17 @@ public class LevelGenerator : MonoBehaviour {
 
     public void generateLevel(int lvl)
     {
+        Debug.Log("Generated "+lvl);
         SceneManager.LoadScene("Level1");
         // GameObject[] scene=SceneManager.GetSceneByName("Level1").GetRootGameObjects();
         //Debug.Log("adsjk");
         //Debug.Log(SceneManager.GetSceneByName("Level1").GetRootGameObjects());
+
+    }
+
+    public void showEndScreen()
+    {
+        SceneManager.LoadScene("EndScreen");
 
     }
 }

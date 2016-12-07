@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\Game\SpawnfriendlyMissile.cs" />
      <Compile Include="Assets\Scripts\Game\enemyMissileScript.cs" />
      <Compile Include="Assets\Scripts\Game\friendlyMissileScript.cs" />
+     <Compile Include="Assets\Scripts\GameStates\EndScreenGui.cs" />
      <Compile Include="Assets\Scripts\GameStates\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameStates\LevelGUI.cs" />
      <Compile Include="Assets\Scripts\GameStates\LevelGenerator.cs" />
