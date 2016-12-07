@@ -1,0 +1,112 @@
+# Wavefront MTL
+# Created by fragMOTION
+# http://www.fragmosoft.com
+
+newmtl Roof
+illum 2
+d 1
+ka 0.752941 0.752941 0.752941
+kd 0.752941 0.752941 0.752941
+ks 0 0 0
+ke 0 0 0
+ns 0
+map_kd WoodPlanksBeamed0010_S.jpg
+newmtl RoofL
+illum 2
+d 1
+ka 0.266667 0.266667 0.266667
+kd 0.266667 0.266667 0.266667
+ks 0 0 0
+ke 0 0 0
+ns 0
+map_kd WoodPlanksBeamed0010_S.jpg
+newmtl Wall1
+illum 2
+d 1
+ka 0.752941 0.752941 0.752941
+kd 0.752941 0.752941 0.752941
+ks 0 0 0
+ke 0 0 0
+ns 0
+map_kd WoodPlanksDirty0097_S.jpg
+newmtl Wall1L
+illum 2
+d 1
+ka 0.266667 0.266667 0.266667
+kd 0.266667 0.266667 0.266667
+ks 0 0 0
+ke 0 0 0
+ns 0
+map_kd WoodPlanksDirty0097_S.jpg
+newmtl Wall2
+illum 2
+d 1
+ka 0.752941 0.752941 0.752941
+kd 0.752941 0.752941 0.752941
+ks 0 0 0
+ke 0 0 0
+ns 0
+map_kd WoodPlanksDirty0045_2_S.jpg
+newmtl Wall2L
+illum 2
+d 1
+ka 0.266667 0.266667 0.266667
+kd 0.266667 0.266667 0.266667
+ks 0 0 0
+ke 0 0 0
+ns 0
+map_kd WoodPlanksDirty0045_2_S.jpg
+newmtl Wall3
+illum 2
+d 1
+ka 0.752941 0.752941 0.752941
+kd 0.752941 0.752941 0.752941
+ks 0 0 0
+ke 0 0 0
+ns 0
+map_kd WoodPlanksBeamed0013_1_S.jpg
+newmtl Wall3L
+illum 2
+d 1
+ka 0.266667 0.266667 0.266667
+kd 0.266667 0.266667 0.266667
+ks 0 0 0
+ke 0 0 0
+ns 0
+map_kd WoodPlanksBeamed0013_1_S.jpg
+newmtl Wall4
+illum 2
+d 1
+ka 0.752941 0.752941 0.752941
+kd 0.752941 0.752941 0.752941
+ks 0 0 0
+ke 0 0 0
+ns 0
+map_kd WoodPlanksBeamed0057_1_S.jpg
+newmtl Wall4L
+illum 2
+d 1
+ka 0.266667 0.266667 0.266667
+kd 0.266667 0.266667 0.266667
+ks 0 0 0
+ke 0 0 0
+ns 0
+map_kd WoodPlanksBeamed0057_1_S.jpg
+newmtl Floor
+illum 2
+d 1
+ka 0.752941 0.752941 0.752941
+kd 0.752941 0.752941 0.752941
+ks 0 0 0
+ke 0 0 0
+ns 0
+map_kd WoodPlanksOverlapping0019_2_S.jpg
+newmtl FloorL
+illum 2
+d 1
+ka 0.266667 0.266667 0.266667
+kd 0.266667 0.266667 0.266667
+ks 0 0 0
+ke 0 0 0
+ns 0
+map_kd WoodPlanksOverlapping0019_2_S.jpg
