@@ -13,7 +13,7 @@ public class MouseControls : MonoBehaviour {
     void Update()
     {
         Vector2 mousePosition = Input.mousePosition;
-				Vector3 cfPosition = GameObject.Find("Collisionfloor").transform.position;
+				Vector3 cfPosition = GameObject.Find("Cursor Plane").transform.position;
 				Ray ray = cam.ScreenPointToRay(new Vector3(mousePosition.x, mousePosition.y, cfPosition.z));
 				
 				float camCFDistance = Vector3.Distance(cfPosition, cam.transform.position);

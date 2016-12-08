@@ -42,4 +42,10 @@ public class LevelGenerator : MonoBehaviour {
         SceneManager.LoadScene("EndScreen");
 
     }
+
+    public void showStartScreen()
+    {
+        SceneManager.LoadScene("StartScreen");
+
+    }
 }

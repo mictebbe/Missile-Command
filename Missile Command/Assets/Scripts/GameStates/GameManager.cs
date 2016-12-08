@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class GameManager : MonoBehaviour {
 
@@ -17,7 +18,9 @@ public class GameManager : MonoBehaviour {
     private bool CityDestroyed4;                  // is city 4 destroyed?
     private bool CityDestroyed5;                  // is city 5 destroyed?
     private bool CityDestroyed6;                  // is city 6 destroyed?
+
     
+
 
     // Creates an instance of gamestate as a gameobject if an instance does not exist
     // ---------------------------------------------------------------------------------------------------
@@ -163,9 +166,9 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    public void update()
+   public void goToMenu()
     {
-        
-        
+        LevelGenerator.Instance.showStartScreen();
+
     }
 }

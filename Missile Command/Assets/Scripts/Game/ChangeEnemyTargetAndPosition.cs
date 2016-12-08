@@ -12,6 +12,8 @@ public class ChangeEnemyTargetAndPosition : MonoBehaviour {
     public GameObject MissileSpawnerCenter;
     public GameObject MissileSpawnerRight;
     private ArrayList Targets = new ArrayList();
+
+
     public void changeTarget(GameObject newTarget)
     {
         if (gameObject.GetComponent<SpawnEnemyMissile>() != null)
@@ -24,7 +26,7 @@ public class ChangeEnemyTargetAndPosition : MonoBehaviour {
 
     public void changePosition()
     {
-        gameObject.transform.position.Set(Random.Range(-10, 10), Random.Range(10, 15), 0);
+        gameObject.transform.position.Set(Random.Range(-100, 100), Random.Range(100, 105), 0);
 
     }
 
@@ -48,10 +50,6 @@ public class ChangeEnemyTargetAndPosition : MonoBehaviour {
        if( Targets.Contains(target)){
             Targets.Remove(target);
 
-        }else if(Targets.Count==0 )
-        {
-            Debug.Log("GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER GAME OVER ");
-
         }
 
     }
@@ -73,11 +71,10 @@ public class ChangeEnemyTargetAndPosition : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Time.frameCount % 160 == 0)
-        {
+   
             changePosition();
-            changeTarget();
+            //changeTarget();
 
-        }
+   
 	}
 }
