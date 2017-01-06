@@ -32,9 +32,9 @@ public class friendlyMissileScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
-        
-        gameObject.transform.Translate(direction*speed);
+
+        StartCoroutine(Fly());
+       
         if (Vector3.Magnitude(gameObject.transform.position-explosionPosition)<=2*speed)
         {
            
@@ -43,5 +43,13 @@ public class friendlyMissileScript : MonoBehaviour {
             Destroy(gameObject);
 
         }
+    }
+
+
+    IEnumerator Fly()
+    {
+        gameObject.transform.Translate(direction * speed);
+
+        yield return null;
     }
 }

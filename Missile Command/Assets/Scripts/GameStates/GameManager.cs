@@ -6,12 +6,13 @@ public class GameManager : MonoBehaviour {
 
     // Declare properties
     public static GameManager instance;
-    
+
+  
 
     // Declare properties
     private int activeLevel;         // Active level
    
-    private int score;                  // Score
+    private int score=0;                  // Score
     private bool CityDestroyed1;                  // is city 1 destroyed?
     private bool CityDestroyed2;                  // is city 2 destroyed?
     private bool CityDestroyed3;                  // is city 3 destroyed?
@@ -56,8 +57,8 @@ public class GameManager : MonoBehaviour {
           //Sets this to not be destroyed when reloading scene
           DontDestroyOnLoad(gameObject);
 
-        
 
+        
         //Call the InitGame function to initialize the first level 
         //startState();
     }
@@ -170,5 +171,38 @@ public class GameManager : MonoBehaviour {
     {
         LevelGenerator.Instance.showStartScreen();
 
+    }
+
+
+    public void addToScore(String eventType)
+    {
+
+        switch(eventType){
+            case "Enemy Missile destroyed":
+                this.score += 25;
+                
+                break;
+            case "Friendly Missile left":
+                this.score += 10;
+               
+                break;
+            case "City left":
+                this.score += 100;
+                
+                break;
+
+
+
+        }
+       
+
+    }
+
+    
+
+    public int getScore()
+    {
+
+        return score;
     }
 }

@@ -22,7 +22,7 @@ public class enemyMissileScript : MonoBehaviour {
        // Debug.Log("Enemy Direction: " + direction);
 
         enemyExplosion = Instantiate(enemyExplosionPrefab) as GameObject;
-        //enemyExplosion.transform.localScale = new Vector3(1, 1, 1);
+        
         enemyExplosion.transform.localPosition = gameObject.transform.localPosition;
         enemyExplosion.SetActive(false);
 
@@ -57,12 +57,20 @@ public class enemyMissileScript : MonoBehaviour {
         
         if (gameObject.GetComponent<Rigidbody>() != null)
         {
-            gameObject.GetComponent<Rigidbody>().transform.Translate(direction * speed);
+            StartCoroutine(Fly());
+           
         }
         /* if (Vector3.Magnitude(gameObject.GetComponent<Rigidbody>().transform.localPosition - explosionPosition) <= 1 * speed)
          {
 
              Explode();
          }*/
+    }
+
+    IEnumerator Fly()
+    {
+        gameObject.GetComponent<Rigidbody>().transform.Translate(direction * speed);
+        
+        yield return null;
     }
 }

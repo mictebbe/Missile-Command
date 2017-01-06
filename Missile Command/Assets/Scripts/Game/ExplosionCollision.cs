@@ -4,6 +4,7 @@ using System.Collections;
 public class ExplosionCollision : MonoBehaviour {
     public float maxExplosionCollision=30;
     public float grothAndShrinkRate = 1;
+    
     private bool growing = true;
 
     void OnTriggerEnter(Collider other)
@@ -13,6 +14,7 @@ public class ExplosionCollision : MonoBehaviour {
         if (other.gameObject.GetComponent<enemyMissileScript>() != null)
         {
             other.gameObject.GetComponent<enemyMissileScript>().Explode();
+            GameManager.Instance.addToScore("Enemy Missile destroyed");
         }
 
        
@@ -24,6 +26,7 @@ public class ExplosionCollision : MonoBehaviour {
     }
 	
 	// Update is called once per frame
+    //TODO: Coroutine
 	void Update () {
 
 
