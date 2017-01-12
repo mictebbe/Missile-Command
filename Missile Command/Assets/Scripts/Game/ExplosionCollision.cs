@@ -9,7 +9,7 @@ public class ExplosionCollision : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Missile explodes from Explosion.");
+       // Debug.Log("Missile explodes from Explosion.");
 
         if (other.gameObject.GetComponent<enemyMissileScript>() != null)
         {

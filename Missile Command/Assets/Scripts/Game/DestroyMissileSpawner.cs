@@ -12,7 +12,7 @@ public class DestroyMissileSpawner : MonoBehaviour {
         if (other.gameObject.GetComponent<enemyMissileScript>() != null)
         {
             other.gameObject.GetComponent<enemyMissileScript>().Explode();
-            Debug.Log("Missile Launcher destroyed!");
+            //Debug.Log("Missile Launcher destroyed!");
         }
 
         Explode();

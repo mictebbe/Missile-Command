@@ -24,7 +24,7 @@ public class DestroyCity : MonoBehaviour {
             LevelGenerator.Instance.showEndScreen();
 
         }
-        Debug.Log("City destroyed! "+ gameObject.name);
+        //Debug.Log("City destroyed! "+ gameObject.name);
 
 				gameObject.transform.GetChild(0).gameObject.SetActive(false);
 				gameObject.transform.GetChild(1).gameObject.SetActive(true);

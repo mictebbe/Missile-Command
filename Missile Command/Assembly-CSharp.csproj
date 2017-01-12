@@ -58,6 +58,7 @@
      <Compile Include="Assets\DualCorStudios\CamoUI Woodland\Standard Assets\CrossPlatformInput\Scripts\VirtualInput.cs" />
      <Compile Include="Assets\Fx Explosion Pack\Script\DestroyEffect.cs" />
      <Compile Include="Assets\Fx Explosion Pack\Script\csLightControl.cs" />
+     <Compile Include="Assets\Helicopter.cs" />
      <Compile Include="Assets\Scripts\DollyZoom.cs" />
      <Compile Include="Assets\Scripts\Game\ChangeEnemyTargetAndPosition.cs" />
      <Compile Include="Assets\Scripts\Game\DestroyCity.cs" />

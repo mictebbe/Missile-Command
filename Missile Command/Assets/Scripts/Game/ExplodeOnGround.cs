@@ -6,7 +6,7 @@ public class ExplodeOnGround : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Missile exploded on Ground!");
+        //Debug.Log("Missile exploded on Ground!");
 
         if (other.gameObject.GetComponent<enemyMissileScript>() != null)
         {
