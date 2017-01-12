@@ -19,6 +19,9 @@ public class Helicopter : MonoBehaviour {
 	void Update () {
 
 		transform.position += transform.forward * (-2.0f);
+	
+		var noise = 2.0f * (Mathf.PerlinNoise(Time.time * 0.3f, 0) - 0.5f);
+		transform.Rotate(new Vector3(0, 0, noise));
 
 		transform.Find("main_rotor").transform.Rotate(new Vector3(0, 0, 15));
 		
