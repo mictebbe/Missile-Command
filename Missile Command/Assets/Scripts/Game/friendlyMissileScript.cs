@@ -55,14 +55,11 @@ public class friendlyMissileScript : MonoBehaviour
 		var amplitude = 4.0f;
 		var scale = 0.006f;
 
-		// redundant?
-		var speedMod = 0.7f;
-
 		var missilePosition = gameObject.transform.position;
 		var path = explosionPosition - missilePosition;
 		direction = Vector3.Normalize(path);
 
-		var translation = direction * speed * speedMod;
+		var translation = direction * speed;
 		var noise = amplitude *  (Mathf.PerlinNoise(path.x * scale, path.y * scale) - 0.5f);
 
 		var side = new Vector3(0, 0, 1);

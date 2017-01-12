@@ -23,13 +23,6 @@ public class ChangeEnemyTargetAndPosition : MonoBehaviour {
         }
     }
 
-
-    public void changePosition()
-    {
-        gameObject.transform.position.Set(Random.Range(-100, 100), Random.Range(100, 105), 0);
-
-    }
-
     public void changeTarget()
     {
         GameObject newTarget;
@@ -71,10 +64,7 @@ public class ChangeEnemyTargetAndPosition : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-   
-            changePosition();
-            //changeTarget();
 
-   
+            changeTarget();   
 	}
 }
