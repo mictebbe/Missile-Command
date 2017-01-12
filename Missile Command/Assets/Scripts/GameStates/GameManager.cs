@@ -182,6 +182,10 @@ public class GameManager : MonoBehaviour {
                 this.score += 25;
                 
                 break;
+            case "Helicopter destroyed":
+                this.score += 50;
+
+                break;
             case "Friendly Missile left":
                 this.score += 10;
                
@@ -190,7 +194,7 @@ public class GameManager : MonoBehaviour {
                 this.score += 100;
                 
                 break;
-
+              
 
 
         }

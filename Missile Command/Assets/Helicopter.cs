@@ -2,13 +2,18 @@
 using System.Collections;
 
 public class Helicopter : MonoBehaviour {
-
-	private Vector3 startPos;
+    public GameObject ExplosionPrefab;
+    private GameObject explosion;
+    private Vector3 startPos;
 	private float speed = 1.0f;
 
 	// Use this for initialization
 	void Start () {
-		startPos = transform.position;
+
+        explosion = Instantiate(ExplosionPrefab) as GameObject;
+        explosion.transform.localPosition = gameObject.transform.localPosition;
+        explosion.SetActive(false);
+        startPos = transform.position;
 
 		AudioSource audio = GetComponent<AudioSource>();
 		audio.Play();
@@ -30,6 +35,20 @@ public class Helicopter : MonoBehaviour {
 			transform.position = startPos;
 			this.enabled = false;
 		}
-		
-	}
+
+      
+
+    }
+
+    public void Explode()
+    {
+        if (explosion != null)
+        {
+            explosion.transform.position= gameObject.transform.position;
+        }
+        explosion.SetActive(true);
+        Debug.Log("Heli hit!");
+        Destroy(gameObject);
+
+    }
 }

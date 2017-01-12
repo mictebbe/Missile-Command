@@ -9,20 +9,33 @@ public class ExplosionCollision : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-       // Debug.Log("Missile explodes from Explosion.");
-
+        // Debug.Log("Missile explodes from Explosion.");
+       
         if (other.gameObject.GetComponent<enemyMissileScript>() != null)
         {
             other.gameObject.GetComponent<enemyMissileScript>().Explode();
             GameManager.Instance.addToScore("Enemy Missile destroyed");
         }
 
+        if (other.gameObject.GetComponent<Helicopter>() != null)
+        {
+            other.gameObject.GetComponent<Helicopter>().Explode();
+            GameManager.Instance.addToScore("Helicopter destroyed");
+
+        }
+
+
        
     }
     // Use this for initialization
     void Start () {
-        
-        
+        gameObject.AddComponent<CapsuleCollider>();
+        gameObject.GetComponent<CapsuleCollider>().radius = 10;
+        gameObject.GetComponent<CapsuleCollider>().direction =0 ;
+        gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
+        gameObject.GetComponent<CapsuleCollider>().height = 1000;
+
+
     }
 	
 	// Update is called once per frame
@@ -32,7 +45,7 @@ public class ExplosionCollision : MonoBehaviour {
 
 
        // gameObject.GetComponent<SphereCollider>().radius += 2f;
-        if ( gameObject.GetComponent<SphereCollider>() != null)
+        if ( gameObject.GetComponent<CapsuleCollider>() != null)
           {
 
             
@@ -40,21 +53,21 @@ public class ExplosionCollision : MonoBehaviour {
       
             if (growing)
             {
-                gameObject.GetComponent<SphereCollider>().radius += grothAndShrinkRate;
+                gameObject.GetComponent<CapsuleCollider>().radius += grothAndShrinkRate;
               //  Debug.Log("growing"+ gameObject.GetComponent<SphereCollider>().radius);
 
             }else{
-                gameObject.GetComponent<SphereCollider>().radius -= grothAndShrinkRate;
+                gameObject.GetComponent<CapsuleCollider>().radius -= grothAndShrinkRate;
               //  Debug.Log("shrinking "+ gameObject.GetComponent<SphereCollider>().radius);
             }
 
-            if (gameObject.GetComponent<SphereCollider>().radius >= maxExplosionCollision)
+            if (gameObject.GetComponent<CapsuleCollider>().radius >= maxExplosionCollision)
             {
                 growing = false;
                // Debug.Log("growing is false");
             }
 
-            if (gameObject.GetComponent<SphereCollider>().radius <= 0)
+            if (gameObject.GetComponent<CapsuleCollider>().radius <= 0)
             {
                // Debug.Log("dead" + gameObject.GetComponent<SphereCollider>().radius);
                 Destroy(gameObject);
