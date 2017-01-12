@@ -41,7 +41,7 @@ public class friendlyMissileScript : MonoBehaviour
 		if (Vector3.Magnitude(gameObject.transform.position - explosionPosition) <= 2 * speed)
 		{
 
-			Debug.Log("Friendly Missile explodes.");
+			//Debug.Log("Friendly Missile explodes.");
 			friendlyExplosion.SetActive(true);
 
 			gameObject.transform.GetChild(0).gameObject.SetActive(false);
