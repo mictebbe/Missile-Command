@@ -44,10 +44,8 @@ public class friendlyMissileScript : MonoBehaviour
 			Debug.Log("Friendly Missile explodes.");
 			friendlyExplosion.SetActive(true);
 
-			// HACK PLEASSE DESTROY MISSILE AFTER SMOKE IS GONE OR JUST MISSILE
-			//Destroy(gameObject);
-			gameObject.transform.position = new Vector3(9999, 9999, 9999);
-
+			gameObject.transform.GetChild(0).gameObject.SetActive(false);
+			gameObject.transform.GetChild(1).GetComponent<ParticleSystem>().Stop();
 		}
 	}
 
