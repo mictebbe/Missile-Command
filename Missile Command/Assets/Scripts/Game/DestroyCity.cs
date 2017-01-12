@@ -25,11 +25,13 @@ public class DestroyCity : MonoBehaviour {
 
         }
         Debug.Log("City destroyed! "+ gameObject.name);
-        Destroy(gameObject);
+
+				gameObject.transform.GetChild(0).gameObject.SetActive(false);
+				gameObject.transform.GetChild(1).gameObject.SetActive(true);
 
 
 
-    }
+	}
     // Use this for initialization
     void Start () {
 	
