@@ -43,7 +43,10 @@ public class friendlyMissileScript : MonoBehaviour
 
 			Debug.Log("Friendly Missile explodes.");
 			friendlyExplosion.SetActive(true);
-			Destroy(gameObject);
+
+			// HACK PLEASSE DESTROY MISSILE AFTER SMOKE IS GONE OR JUST MISSILE
+			//Destroy(gameObject);
+			gameObject.transform.position = new Vector3(9999, 9999, 9999);
 
 		}
 	}
@@ -52,8 +55,10 @@ public class friendlyMissileScript : MonoBehaviour
 	IEnumerator Fly()
 	{
 		var amplitude = 4.0f;
-		var speedMod = 0.7f; // redundant
 		var scale = 0.006f;
+
+		// redundant?
+		var speedMod = 0.7f;
 
 		var missilePosition = gameObject.transform.position;
 		var path = explosionPosition - missilePosition;
