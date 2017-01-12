@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class ExplosionCollision : MonoBehaviour {
-    public float maxExplosionCollision=30;
-    public float grothAndShrinkRate = 1;
+    private float maxExplosionCollision=30;
+    private float grothAndShrinkRate = 1;
     
     private bool growing = true;
 
@@ -30,8 +30,8 @@ public class ExplosionCollision : MonoBehaviour {
     // Use this for initialization
     void Start () {
         gameObject.AddComponent<CapsuleCollider>();
-        gameObject.GetComponent<CapsuleCollider>().radius = 10;
-        gameObject.GetComponent<CapsuleCollider>().direction =0 ;
+        gameObject.GetComponent<CapsuleCollider>().radius = 0;
+        gameObject.GetComponent<CapsuleCollider>().direction =2 ;//2=z-axis
         gameObject.GetComponent<CapsuleCollider>().isTrigger = true;
         gameObject.GetComponent<CapsuleCollider>().height = 1000;
 

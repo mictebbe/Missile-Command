@@ -11,7 +11,6 @@ public class GameManager : MonoBehaviour {
 
     // Declare properties
     private int activeLevel;         // Active level
-   
     private int score=0;                  // Score
     private bool CityDestroyed1;                  // is city 1 destroyed?
     private bool CityDestroyed2;                  // is city 2 destroyed?
@@ -20,7 +19,8 @@ public class GameManager : MonoBehaviour {
     private bool CityDestroyed5;                  // is city 5 destroyed?
     private bool CityDestroyed6;                  // is city 6 destroyed?
 
-    
+    public int EnemyMissilesLiving;
+
 
 
     // Creates an instance of gamestate as a gameobject if an instance does not exist
@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour {
             return instance;
         }
     }
+
+ 
 
 
     //Awake is always called before any Start functions
@@ -170,6 +172,7 @@ public class GameManager : MonoBehaviour {
    public void goToMenu()
     {
         LevelGenerator.Instance.showStartScreen();
+
 
     }
 

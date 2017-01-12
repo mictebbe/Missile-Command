@@ -30,14 +30,21 @@ public class enemyMissileScript : MonoBehaviour {
         {
             enemyExplosion.AddComponent<ExplosionScript>();
         }
+
+        if (enemyExplosion.GetComponent<ExplosionCollision>() == null)
+        {
+            enemyExplosion.AddComponent<ExplosionCollision>();
+        }
+
     }
 
    public void Explode()
     {
         
-        Debug.Log("Enemy Missile explodes at: "+ gameObject.transform.localPosition);
+       // Debug.Log("Enemy Missile explodes at: "+ gameObject.transform.localPosition);
         Destroy(gameObject);
         enemyExplosion.SetActive(true);
+        GameManager.Instance.EnemyMissilesLiving -= 1;
 
 
     }

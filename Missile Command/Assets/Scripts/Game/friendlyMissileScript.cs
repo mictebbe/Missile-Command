@@ -30,7 +30,12 @@ public class friendlyMissileScript : MonoBehaviour
 			friendlyExplosion.AddComponent<ExplosionScript>();
 		}
 
-	}
+        if (friendlyExplosion.GetComponent<ExplosionCollision>() == null)
+        {
+            friendlyExplosion.AddComponent<ExplosionCollision>();
+        }
+
+    }
 
 	// Update is called once per frame
 	void Update()
