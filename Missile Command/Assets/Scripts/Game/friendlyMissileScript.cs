@@ -17,8 +17,8 @@ public class friendlyMissileScript : MonoBehaviour
 		explosionPosition = cursor.transform.position;
 	
 
-		Debug.Log("Explosion position: " + explosionPosition);
-		Debug.Log("Direction: " + direction);
+		//Debug.Log("Explosion position: " + explosionPosition);
+		//Debug.Log("Direction: " + direction);
 
 		friendlyExplosion = Instantiate(friendlyExplosionPrefab) as GameObject;
 		//friendlyExplosion.transform.localScale = new Vector3(1, 1, 1);

@@ -52,12 +52,12 @@ public class SpawnfriendlyMissile : MonoBehaviour
 				current.transform.Translate(gameObject.transform.position);
 
 				current.SetActive(true);
-
+                GameManager.instance.friendlyMissilesLiving -= 1;
 				currentAmount--;
 			}
 			else
 			{
-				Debug.Log("No missiles left in Missile Launcher '" + gameObject.name + "'");
+				//Debug.Log("No missiles left in Missile Launcher '" + gameObject.name + "'");
 			}
 		}
 	}

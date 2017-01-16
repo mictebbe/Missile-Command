@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour {
     private int score=0;                  // Score
     private int lastLevelScore = 0;
     private int enemyMissileAmount = 2;
+    //friendlyMissileAmount is the initial amount of shots the player has per launcher.
     private int friendlyMissileAmount = 10;
+
 
     private bool CityDestroyed1;                  // is city 1 destroyed?
     private bool CityDestroyed2;                  // is city 2 destroyed?
@@ -25,7 +27,10 @@ public class GameManager : MonoBehaviour {
     private bool CityDestroyed6;                  // is city 6 destroyed?
 
     public int enemyMissilesLiving;
-
+    //friendlyMissilesLiving is the sum of shots the player has left from all launchers.
+    public int friendlyMissilesLiving;
+    
+    private bool gameEnded = false;
 
 
     // Creates an instance of gamestate as a gameobject if an instance does not exist
@@ -71,6 +76,11 @@ public class GameManager : MonoBehaviour {
     {
         return enemyMissileAmount;
     }
+
+    public int getFriendlyMissileAmount()
+    {
+        return friendlyMissileAmount;
+    }
     //Initializes the game for each level.
     public void initLevel()
     {
@@ -83,7 +93,8 @@ public class GameManager : MonoBehaviour {
     private void resetMissiles()
     {
         enemyMissilesLiving = enemyMissileAmount;
-    }
+        friendlyMissilesLiving = 3*friendlyMissileAmount;
+        }
 
     // Sets the instance to null when the application quits
     public void OnApplicationQuit()
@@ -99,7 +110,8 @@ public class GameManager : MonoBehaviour {
     // Creates a new game state
     // ---------------------------------------------------------------------------------------------------
     public void startNewGame(){
-        Debug.Log("Creating a new game state");
+        gameEnded = false;
+        //Debug.Log("Creating a new game state");
         resetMissiles();
          activeLevel=1;         // Active level
     
@@ -288,8 +300,41 @@ public class GameManager : MonoBehaviour {
 
     void countLevelScore()
     {
-        //todo:count level Score
-        Debug.Log("LevelScore not countet yet!");
+        //Count City Scores
+        if (!CityDestroyed1) {
+            addToScore("City left");
+                }
+
+        if (!CityDestroyed2)
+        {
+            addToScore("City left");
+        }
+        if (!CityDestroyed3)
+        {
+            addToScore("City left");
+        }
+        if (!CityDestroyed4)
+        {
+            addToScore("City left");
+        }
+        if (!CityDestroyed5)
+        {
+            addToScore("City left");
+        }
+        if (!CityDestroyed6)
+        {
+            addToScore("City left");
+        }
+       
+        //Count Friendly missile Scores
+        for(int i=0; i < friendlyMissilesLiving; i++)
+        {
+            addToScore("Friendly Missile left");
+
+        }
+
+
+      
 
     }
 
@@ -370,8 +415,11 @@ public class GameManager : MonoBehaviour {
 
     public void endGame()
     {
-        LevelGenerator.Instance.showEndScreen();
-
+        if (!gameEnded)
+        {
+            gameEnded = true;
+            LevelGenerator.Instance.showEndScreen();
+        }
     }
 
     public float getEnemyMissileSpeed()

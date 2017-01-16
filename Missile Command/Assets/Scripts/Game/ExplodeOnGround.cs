@@ -10,6 +10,7 @@ public class ExplodeOnGround : MonoBehaviour {
 
         if (other.gameObject.GetComponent<enemyMissileScript>() != null)
         {
+            Debug.Log("Missile explodes on Ground");
             other.gameObject.GetComponent<enemyMissileScript>().Explode();
         }
 

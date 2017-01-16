@@ -8,6 +8,7 @@ public class enemyMissileScript : MonoBehaviour {
     private Vector3 explosionPosition;
     private GameObject enemyExplosion;
     public GameObject target;
+    bool notExploded = true;
     // Use this for initialization
     void Start()
     {
@@ -40,14 +41,17 @@ public class enemyMissileScript : MonoBehaviour {
 
    public void Explode()
     {
-        
-       // Debug.Log("Enemy Missile explodes at: "+ gameObject.transform.localPosition);
-   
-        enemyExplosion.SetActive(true);
-        GameManager.Instance.enemyMissilesLiving -= 1;
-        
-        Debug.Log("Missiles Living: " + GameManager.Instance.enemyMissilesLiving);
-        Destroy(gameObject);
+        if (notExploded)
+        {
+            // Debug.Log("Enemy Missile explodes at: "+ gameObject.transform.localPosition);
+
+            enemyExplosion.SetActive(true);
+            GameManager.Instance.enemyMissilesLiving -= 1;
+
+            //Debug.Log("Missiles Living: " + GameManager.Instance.enemyMissilesLiving);
+            Destroy(gameObject);
+            notExploded = false;
+        }
     }
 
  

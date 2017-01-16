@@ -11,6 +11,7 @@ public class DestroyMissileSpawner : MonoBehaviour {
 
         if (other.gameObject.GetComponent<enemyMissileScript>() != null)
         {
+            //Debug.Log("Missile explodes on Spawner");
             other.gameObject.GetComponent<enemyMissileScript>().Explode();
             //Debug.Log("Missile Launcher destroyed!");
         }
@@ -30,15 +31,7 @@ public class DestroyMissileSpawner : MonoBehaviour {
 
 
     }
-    // Use this for initialization
-    void Start()
-    {
+   
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+  
 }
