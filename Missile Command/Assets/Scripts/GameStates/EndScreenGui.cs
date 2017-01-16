@@ -20,11 +20,8 @@ public class EndScreenGui : MonoBehaviour {
     private void restartGame()
     {
      
-        //DontDestroyOnLoad(GameManager.instance);
-        //DontDestroyOnLoad(LevelGenerator.instance);
-        GameManager.Instance.startState();
-        //Debug.Log("startGame() " + GameManager.Instance.getLevel());
-        GameManager.Instance.initLevel();
+        
+        GameManager.Instance.startNewGame();
         
 
 }

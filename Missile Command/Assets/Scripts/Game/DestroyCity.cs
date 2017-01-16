@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class DestroyCity : MonoBehaviour {
-
+    public string cityName;
     
     void OnTriggerEnter(Collider other)
     {
@@ -19,9 +19,10 @@ public class DestroyCity : MonoBehaviour {
     void Explode()
     {
         GameManager.Instance.destroyCity(gameObject);
+
         if (GameManager.Instance.isDestroyed())
         {
-            LevelGenerator.Instance.showEndScreen();
+            GameManager.Instance.endGame();
 
         }
         //Debug.Log("City destroyed! "+ gameObject.name);
@@ -34,7 +35,17 @@ public class DestroyCity : MonoBehaviour {
 	}
     // Use this for initialization
     void Start () {
-	
+
+        if (GameManager.Instance.isCityDestroyed(this.gameObject)) {
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            gameObject.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            gameObject.transform.GetChild(1).gameObject.SetActive(false);
+
+        }
 	}
 	
 	// Update is called once per frame

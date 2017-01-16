@@ -42,11 +42,12 @@ public class enemyMissileScript : MonoBehaviour {
     {
         
        // Debug.Log("Enemy Missile explodes at: "+ gameObject.transform.localPosition);
-        Destroy(gameObject);
+   
         enemyExplosion.SetActive(true);
-        GameManager.Instance.EnemyMissilesLiving -= 1;
-
-
+        GameManager.Instance.enemyMissilesLiving -= 1;
+        
+        Debug.Log("Missiles Living: " + GameManager.Instance.enemyMissilesLiving);
+        Destroy(gameObject);
     }
 
  

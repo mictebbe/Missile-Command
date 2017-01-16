@@ -3,10 +3,10 @@ using System.Collections;
 
 public class SpawnEnemyMissile : MonoBehaviour
 {
-	public GameObject mainGame;
+	
 	public GameObject enemyMissilePrefab;
-	public int amount;
-	public float speed;
+	private int amount=0;
+	private float speed;
 	public GameObject enemyMissileExplosion;
 	public GameObject target;
 	private ArrayList missiles = new ArrayList();
@@ -16,11 +16,12 @@ public class SpawnEnemyMissile : MonoBehaviour
 	void Start()
 	{
 
+        this.speed = GameManager.Instance.getEnemyMissileSpeed();
 
-		mainGame = GameObject.Find("MainGameScript");
+        amount = GameManager.Instance.getEnemyMissileAmount();
 
-		this.speed = GameManager.Instance.getLevel() * 0.6f;
-		for (int i = 0; i <= amount; i++)
+       
+		for (int i = 0; i < amount; i++)
 		{
 			GameObject temp = Instantiate(enemyMissilePrefab) as GameObject;
 			//temp.transform.localScale = new Vector3(1, 1, 1);

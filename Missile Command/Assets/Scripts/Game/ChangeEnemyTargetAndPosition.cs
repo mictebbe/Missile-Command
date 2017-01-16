@@ -33,7 +33,7 @@ public class ChangeEnemyTargetAndPosition : MonoBehaviour {
         if (gameObject.GetComponent<SpawnEnemyMissile>() != null && newTarget!=null)
         {
             gameObject.GetComponent<SpawnEnemyMissile>().target = newTarget;
-            Debug.Log("AutoChange Target to '" + newTarget + "'");
+           // Debug.Log("AutoChange Target to '" + newTarget + "'");
 
         }
     }

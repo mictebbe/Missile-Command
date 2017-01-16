@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 
+
 public class GameManager : MonoBehaviour {
 
     // Declare properties
@@ -12,6 +13,10 @@ public class GameManager : MonoBehaviour {
     // Declare properties
     private int activeLevel;         // Active level
     private int score=0;                  // Score
+    private int lastLevelScore = 0;
+    private int enemyMissileAmount = 2;
+    private int friendlyMissileAmount = 10;
+
     private bool CityDestroyed1;                  // is city 1 destroyed?
     private bool CityDestroyed2;                  // is city 2 destroyed?
     private bool CityDestroyed3;                  // is city 3 destroyed?
@@ -19,7 +24,7 @@ public class GameManager : MonoBehaviour {
     private bool CityDestroyed5;                  // is city 5 destroyed?
     private bool CityDestroyed6;                  // is city 6 destroyed?
 
-    public int EnemyMissilesLiving;
+    public int enemyMissilesLiving;
 
 
 
@@ -37,9 +42,6 @@ public class GameManager : MonoBehaviour {
             return instance;
         }
     }
-
- 
-
 
     //Awake is always called before any Start functions
     void Awake()
@@ -65,17 +67,23 @@ public class GameManager : MonoBehaviour {
         //startState();
     }
 
+    public int getEnemyMissileAmount()
+    {
+        return enemyMissileAmount;
+    }
     //Initializes the game for each level.
     public void initLevel()
     {
-
+       
         //Call the SetupScene function of the BoardManager script, pass it current level number.
-        LevelGenerator.Instance.generateLevel(this.activeLevel);
+        LevelGenerator.Instance.generateLevel();
 
     }
 
-
-    
+    private void resetMissiles()
+    {
+        enemyMissilesLiving = enemyMissileAmount;
+    }
 
     // Sets the instance to null when the application quits
     public void OnApplicationQuit()
@@ -90,13 +98,12 @@ public class GameManager : MonoBehaviour {
     // --------------------------------------------------------------------------------------------------- 
     // Creates a new game state
     // ---------------------------------------------------------------------------------------------------
-    public void startState()
-    {
-        print("Creating a new game state");
-
+    public void startNewGame(){
+        Debug.Log("Creating a new game state");
+        resetMissiles();
          activeLevel=1;         // Active level
     
-    score=0;                  // Score
+        score=0;                  // Score
 
         CityDestroyed1 = false;                  // is city 1 destroyd?
         CityDestroyed2 = false;                  // is city 2 destroyd?
@@ -104,9 +111,9 @@ public class GameManager : MonoBehaviour {
         CityDestroyed4 = false;                  // is city 4 destroyd?
         CityDestroyed5 = false;                  // is city 5 destroyd?
         CityDestroyed6 = false;                  // is city 6 destroyd?
+        initLevel();
 
-       
-}
+    }
 
     public int getLevel()
     {
@@ -120,7 +127,6 @@ public class GameManager : MonoBehaviour {
         this.activeLevel++;
 
     }
-
 
     public bool isDestroyed()
     {
@@ -169,13 +175,54 @@ public class GameManager : MonoBehaviour {
 
     }
 
-   public void goToMenu()
+    public bool isCityDestroyed(GameObject cityToDestroy)
+    {
+
+        
+        switch (cityToDestroy.name)
+        {
+            case "City1":
+               return this.CityDestroyed1;
+
+              
+
+            case "City2":
+                return this.CityDestroyed2;
+
+              
+
+            case "City3":
+                return this.CityDestroyed3;
+
+                
+
+            case "City4":
+                return this.CityDestroyed4;
+
+                
+
+            case "City5":
+                return this.CityDestroyed5;
+
+                
+
+            case "City6":
+                return this.CityDestroyed6;
+
+            default:
+                return true;
+
+
+        }
+
+    }
+
+    public void goToMenu()
     {
         LevelGenerator.Instance.showStartScreen();
 
 
     }
-
 
     public void addToScore(String eventType)
     {
@@ -205,11 +252,133 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    
-
     public int getScore()
     {
 
         return score;
     }
+
+    public void goToOptions()
+    {
+        LevelGenerator.Instance.showOptions();
+
+
+    }
+
+    void goToNextLevel()
+    {
+
+        countLevelScore();
+
+        activeLevel += 1;
+        
+        for(int i=0;i<(score - lastLevelScore)/10000; i++)
+        {
+
+            reviveCity();
+
+        }
+            lastLevelScore = score;
+        resetMissiles();
+        initLevel();
+
+
+
+    }
+
+    void countLevelScore()
+    {
+        //todo:count level Score
+        Debug.Log("LevelScore not countet yet!");
+
+    }
+
+    void Update()
+    {
+        if (isDestroyed())
+        {
+            endGame();
+
+
+        }
+        if (enemyMissilesLiving == 0)
+        {
+            goToNextLevel();
+
+        }
+    }
+
+    void reviveCity() {
+
+        //Make Array of Cities
+        ArrayList destroyedCities = new ArrayList();
+        if (CityDestroyed1)
+        {
+            destroyedCities.Add(CityDestroyed1);
+        }
+        if (CityDestroyed2)
+        {
+            destroyedCities.Add(CityDestroyed2);
+        }
+        if (CityDestroyed3)
+        {
+            destroyedCities.Add(CityDestroyed3);
+        }
+        if (CityDestroyed4)
+        {
+            destroyedCities.Add(CityDestroyed4);
+        }
+        if (CityDestroyed5)
+        {
+            destroyedCities.Add(CityDestroyed5);
+        }
+        if (CityDestroyed6)
+        {
+            destroyedCities.Add(CityDestroyed6);
+        }
+
+        //Pick random City
+        object cityToRevive=destroyedCities[UnityEngine.Random.Range(0, destroyedCities.Count)];
+
+        //Revive picked city
+        if (cityToRevive.Equals(CityDestroyed1))
+        {
+            CityDestroyed1 = false;
+        }
+
+        if (cityToRevive.Equals(CityDestroyed2))
+        {
+            CityDestroyed2 = false;
+        }
+        if (cityToRevive.Equals(CityDestroyed3))
+        {
+            CityDestroyed3 = false;
+        }
+        if (cityToRevive.Equals(CityDestroyed4))
+        {
+            CityDestroyed4 = false;
+        }
+        if (cityToRevive.Equals(CityDestroyed5))
+        {
+            CityDestroyed5 = false;
+        }
+        if (cityToRevive.Equals(CityDestroyed6))
+        {
+            CityDestroyed6 = false;
+        }
+    }
+
+    public void endGame()
+    {
+        LevelGenerator.Instance.showEndScreen();
+
+    }
+
+    public float getEnemyMissileSpeed()
+    {
+        return 1.2f + 0.05f * activeLevel;
+
+    }
 }
+
+

@@ -23,23 +23,18 @@ public class StartScreenGui : MonoBehaviour {
 
     private void startGame()
     {
-        print("Starting game");
 
-       DontDestroyOnLoad(GameManager.instance);
-        DontDestroyOnLoad(LevelGenerator.instance);
-        GameManager.Instance.startState();
-        Debug.Log("startGame() "+GameManager.Instance.getLevel());
-        GameManager.Instance.initLevel();
+      
+        GameManager.Instance.startNewGame();
+        
         
     }
 
     // Use this for initialization
     void Start () {
+       
+    }
 	
-	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }
