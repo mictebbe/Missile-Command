@@ -36,7 +36,7 @@ public class MissileSpawnerEnemy : MonoBehaviour
 		for (int i = 0; i < loadedMissles; i++)
 		{
 			GameObject missile = Instantiate(missilePrefab) as GameObject;
-			missile.transform.parent = GameObject.Find("Missiles").transform;
+			missile.transform.parent = GameObject.Find("MissilesEnemy").transform;
 			missile.AddComponent<MissileEnemy>();
 
 			var missileScript = missile.GetComponent<MissileEnemy>();
@@ -64,7 +64,7 @@ public class MissileSpawnerEnemy : MonoBehaviour
 
 				GameObject missile = (GameObject) missiles.Pop();
 				var targetX = target.transform.position.x;
-				missile.transform.Translate(new Vector3(targetX + Random.Range(-50, 50), 0, 0));
+				missile.transform.Translate(new Vector3(targetX + Random.Range(-80, 80), 0, 0));
 
 				missile.GetComponent<MissileEnemy>().Fire(target.transform.position);
 			}

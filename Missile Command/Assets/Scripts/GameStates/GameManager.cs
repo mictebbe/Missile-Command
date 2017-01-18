@@ -290,7 +290,8 @@ public class GameManager : MonoBehaviour
 		{
 			endGame();
 		}
-		if (enemyMissilesLiving == 0)
+		var leftEnemyMissiles = GameObject.Find("MissilesEnemy").transform.childCount;
+		if (leftEnemyMissiles <= 0)
 		{
 			goToNextLevel();
 		}
@@ -367,6 +368,6 @@ public class GameManager : MonoBehaviour
 
 	public float getEnemyMissileSpeed()
 	{
-		return 1.5f + 0.05f * activeLevel;
+		return 1.0f + 0.1f * activeLevel;
 	}
 }
