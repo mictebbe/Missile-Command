@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
+public enum ScoreState : int { missileDestroyed = 0, heliDestroyed = 1, missileLeft = 2, cityLeft = 3 };
 
 public class GameManager : MonoBehaviour
 {
+		
 	// Declare properties
 	public static GameManager instance;
 	
@@ -17,12 +20,8 @@ public class GameManager : MonoBehaviour
 	//friendlyMissileAmount is the initial amount of shots the player has per launcher.
 	private int friendlyMissileAmount = 10;
 
-	private bool CityDestroyed1;                  // is city 1 destroyed?
-	private bool CityDestroyed2;                  // is city 2 destroyed?
-	private bool CityDestroyed3;                  // is city 3 destroyed?
-	private bool CityDestroyed4;                  // is city 4 destroyed?
-	private bool CityDestroyed5;                  // is city 5 destroyed?
-	private bool CityDestroyed6;                  // is city 6 destroyed?
+	private const int citiesCount = 6;
+	private List<bool> citiesDestroyed = new List<bool>();
 
 	public int enemyMissilesLiving;
 	
@@ -60,6 +59,11 @@ public class GameManager : MonoBehaviour
 		{
 			//Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
 			Destroy(gameObject);
+		}
+
+		for (var i = 0; i < citiesCount; ++i)
+		{
+			citiesDestroyed.Add(false);
 		}
 
 		//Sets this to not be destroyed when reloading scene
@@ -113,13 +117,7 @@ public class GameManager : MonoBehaviour
 		activeLevel = 1;                
 		score = 0;
 
-		// is city destroyd?
-		CityDestroyed1 = false;                
-		CityDestroyed2 = false;                  
-		CityDestroyed3 = false;                  
-		CityDestroyed4 = false;                  
-		CityDestroyed5 = false;                  
-		CityDestroyed6 = false;                  	  
+            	  
 		initLevel();
 	}
 
@@ -133,69 +131,34 @@ public class GameManager : MonoBehaviour
 		this.activeLevel++;
 	}
 
+	// check if all cities are destroyed
 	public bool isDestroyed()
 	{
-		return (CityDestroyed1 && CityDestroyed2 && CityDestroyed3 && CityDestroyed4 && CityDestroyed5 && CityDestroyed6);
+		foreach (bool cityDestroyed in citiesDestroyed) {
+			if(!cityDestroyed)
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public void destroyCity(GameObject cityToDestroy)
 	{
-
-		//Debug.Log("DESTROYCITY " + cityToDestroy.name);
-		switch (cityToDestroy.name)
-		{
-			case "City1":
-				this.CityDestroyed1 = true;
-				break;
-
-			case "City2":
-				this.CityDestroyed2 = true;
-				break;
-
-			case "City3":
-				this.CityDestroyed3 = true;
-				break;
-
-			case "City4":
-				this.CityDestroyed4 = true;
-				break;
-
-			case "City5":
-				this.CityDestroyed5 = true;
-				break;
-
-			case "City6":
-				this.CityDestroyed6 = true;
-				break;
-		}
-
+		var name = cityToDestroy.name;
+		var cityIndex = name.Substring(name.Length - 1, 1);
+		int idx = Convert.ToInt32(cityIndex) - 1;
+		
+		citiesDestroyed[idx] = true;
 	}
 
 	public bool isCityDestroyed(GameObject cityToDestroy)
 	{
-		switch (cityToDestroy.name)
-		{
-			case "City1":
-				return this.CityDestroyed1;
+		var name = cityToDestroy.name;
+		var cityIndex = name.Substring(name.Length - 1, 1);
+		int idx = Convert.ToInt32(cityIndex) - 1;
 
-			case "City2":
-				return this.CityDestroyed2;
-
-			case "City3":
-				return this.CityDestroyed3;
-
-			case "City4":
-				return this.CityDestroyed4;
-
-			case "City5":
-				return this.CityDestroyed5;
-
-			case "City6":
-				return this.CityDestroyed6;
-
-			default:
-				return true;
-		}
+		return citiesDestroyed[idx];
 	}
 
 	public void goToMenu()
@@ -203,20 +166,21 @@ public class GameManager : MonoBehaviour
 		LevelGenerator.Instance.showStartScreen();
 	}
 
-	public void addToScore(String eventType)
+	public void addToScore(ScoreState state)
 	{
-		switch (eventType)
+		switch (state)
 		{
-			case "Enemy Missile destroyed":
+			case ScoreState.missileDestroyed:
 				this.score += 25;
+				Debug.Log("Enemy Missile destroyed");
 				break;
-			case "Helicopter destroyed":
+			case ScoreState.heliDestroyed:
 				this.score += 50;
 				break;
-			case "Friendly Missile left":
+			case ScoreState.missileLeft:
 				this.score += 10;
 				break;
-			case "City left":
+			case ScoreState.cityLeft:
 				this.score += 100;
 				break;
 		}
@@ -249,37 +213,18 @@ public class GameManager : MonoBehaviour
 
 	void countLevelScore()
 	{
-		//Count City Scores
-		if (!CityDestroyed1)
+		foreach(bool cityDestroyd in citiesDestroyed)
 		{
-			addToScore("City left");
+			if(cityDestroyd == false)
+			{
+				addToScore(ScoreState.cityLeft);
+			}
 		}
-
-		if (!CityDestroyed2)
-		{
-			addToScore("City left");
-		}
-		if (!CityDestroyed3)
-		{
-			addToScore("City left");
-		}
-		if (!CityDestroyed4)
-		{
-			addToScore("City left");
-		}
-		if (!CityDestroyed5)
-		{
-			addToScore("City left");
-		}
-		if (!CityDestroyed6)
-		{
-			addToScore("City left");
-		}
-
+		
 		//Count Friendly missile Scores
 		for (int i = 0; i < friendlyMissilesLiving; i++)
 		{
-			addToScore("Friendly Missile left");
+			addToScore(ScoreState.missileLeft);
 		}
 
 	}
@@ -299,62 +244,27 @@ public class GameManager : MonoBehaviour
 
 	void reviveCity()
 	{
-		//Make Array of Cities
-		ArrayList destroyedCities = new ArrayList();
-		if (CityDestroyed1)
+		foreach(bool cityDestroyd in citiesDestroyed)
 		{
-			destroyedCities.Add(CityDestroyed1);
-		}
-		if (CityDestroyed2)
-		{
-			destroyedCities.Add(CityDestroyed2);
-		}
-		if (CityDestroyed3)
-		{
-			destroyedCities.Add(CityDestroyed3);
-		}
-		if (CityDestroyed4)
-		{
-			destroyedCities.Add(CityDestroyed4);
-		}
-		if (CityDestroyed5)
-		{
-			destroyedCities.Add(CityDestroyed5);
-		}
-		if (CityDestroyed6)
-		{
-			destroyedCities.Add(CityDestroyed6);
+			if (!cityDestroyd)
+			{
+				addToScore(ScoreState.cityLeft);
+			}
 		}
 
 		//Pick random City
-		object cityToRevive = destroyedCities[UnityEngine.Random.Range(0, destroyedCities.Count)];
+		for (var i = 0; i < citiesCount; ++i)
+		{
+			int randomCityIdx = UnityEngine.Random.Range(0, citiesDestroyed.Count);
+			bool cityToRevive = citiesDestroyed[randomCityIdx];
 
-		//Revive picked city
-		if (cityToRevive.Equals(CityDestroyed1))
-		{
-			CityDestroyed1 = false;
+			if (citiesDestroyed[randomCityIdx] == true)
+			{
+				citiesDestroyed[randomCityIdx] = false;
+				break;
+			}
 		}
-
-		if (cityToRevive.Equals(CityDestroyed2))
-		{
-			CityDestroyed2 = false;
-		}
-		if (cityToRevive.Equals(CityDestroyed3))
-		{
-			CityDestroyed3 = false;
-		}
-		if (cityToRevive.Equals(CityDestroyed4))
-		{
-			CityDestroyed4 = false;
-		}
-		if (cityToRevive.Equals(CityDestroyed5))
-		{
-			CityDestroyed5 = false;
-		}
-		if (cityToRevive.Equals(CityDestroyed6))
-		{
-			CityDestroyed6 = false;
-		}
+		
 	}
 
 	public void endGame()

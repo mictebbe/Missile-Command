@@ -29,7 +29,7 @@ public class MissileSpawnerFriendly : MonoBehaviour
 		for (int i = 0; i < loadedMissles; i++)
 		{
 			GameObject missile = Instantiate(missilePrefab) as GameObject;
-			missile.transform.parent = GameObject.Find("Missiles").transform;
+			missile.transform.parent = GameObject.Find("MissilesFriendly").transform;
 			missile.AddComponent<MissileFriendly>();
 
 			var missileScript = missile.GetComponent<MissileFriendly>();
@@ -71,7 +71,7 @@ public class MissileSpawnerFriendly : MonoBehaviour
 
 	void OnTriggerEnter(Collider collider)
 	{
-		if (collider.gameObject.name != "Terrain")
+		if (collider.gameObject.name == "MissileEnemy(Clone)")
 		{
 			Explode();
 		}

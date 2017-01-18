@@ -45,7 +45,7 @@ public class City : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collider)
 	{
-		if(collider.gameObject.name != "Terrain")
+		if (collider.gameObject.name == "MissileEnemy(Clone)" )
 		{
 			Explode();
 		}
