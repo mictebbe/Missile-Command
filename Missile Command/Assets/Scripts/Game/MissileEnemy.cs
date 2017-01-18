@@ -14,7 +14,7 @@ public class MissileEnemy : MonoBehaviour {
 	
 	private Vector3 translation;
 	private GameObject explosion;
-	private bool doMove = true;
+	private bool moving = true;
 
 	// Use this for initialization
 	void Start()
@@ -28,7 +28,7 @@ public class MissileEnemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		if(doMove)
+		if(moving)
 		{
 			StartCoroutine(Fly());
 		}
@@ -66,7 +66,7 @@ public class MissileEnemy : MonoBehaviour {
 
 	public void Explode()
 	{
-		doMove = false;
+		moving = false;
 		explosion.SetActive(true);
 		gameObject.transform.GetChild(0).gameObject.SetActive(false); // disable missile
 		//GameManager.Instance.EnemyMissilesLiving -= 1;

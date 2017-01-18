@@ -15,6 +15,7 @@ public class MissileFriendly : MonoBehaviour
 	private Vector3 direction;
 	private GameObject explosion;
 	private bool once = true;
+	private bool moving = true;
 
 	void Start()
 	{
@@ -26,7 +27,10 @@ public class MissileFriendly : MonoBehaviour
 
 	void Update()
 	{
-		StartCoroutine(Fly());
+		if (moving)
+		{
+			StartCoroutine(Fly());
+		}
 	}
 
 	IEnumerator Fly()
@@ -49,6 +53,7 @@ public class MissileFriendly : MonoBehaviour
 		else if(once)
 		{
 			once = false;
+			moving = false;
 			Explode();
 		}
 		yield return null;
