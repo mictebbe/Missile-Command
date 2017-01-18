@@ -235,11 +235,16 @@ public class GameManager : MonoBehaviour
 		{
 			endGame();
 		}
-		var leftEnemyMissiles = GameObject.Find("MissilesEnemy").transform.childCount;
-		if (leftEnemyMissiles <= 0)
+		object leftEnemyMissiles = GameObject.Find("MissilesEnemy").transform.childCount;
+		if(leftEnemyMissiles != null)
 		{
-			goToNextLevel();
+			int num = (int)leftEnemyMissiles;
+			if (num <= 0)
+			{
+				goToNextLevel();
+			}
 		}
+
 	}
 
 	void reviveCity()
