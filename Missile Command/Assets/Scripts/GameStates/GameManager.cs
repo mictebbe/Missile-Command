@@ -367,6 +367,6 @@ public class GameManager : MonoBehaviour
 
 	public float getEnemyMissileSpeed()
 	{
-		return 1.2f + 0.05f * activeLevel;
+		return 1.5f + 0.05f * activeLevel;
 	}
 }

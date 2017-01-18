@@ -45,7 +45,8 @@ public class MissileFriendly : MonoBehaviour
 
 			gameObject.transform.GetChild(0).transform.rotation = Quaternion.LookRotation(-translation);
 			gameObject.transform.Translate(translation);
-		} else if(once)
+		}
+		else if(once)
 		{
 			once = false;
 			Explode();
@@ -59,7 +60,7 @@ public class MissileFriendly : MonoBehaviour
 		transform.GetChild(0).gameObject.SetActive(false);
 	}
 
-	void OnTriggerEnter(Collider other)
+	void OnTriggerEnter(Collider collider)
 	{
 		Explode();
 	}

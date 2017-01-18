@@ -8,7 +8,7 @@ public class MissileSpawnerEnemy : MonoBehaviour
 
 	private GameObject target;
 	private int loadedMissles = 10;
-	private float speed = 10.0f;
+	private float speed = 1.0f;
 	
 	private Stack missiles = new Stack();
 	private ArrayList targets = new ArrayList();
@@ -43,9 +43,9 @@ public class MissileSpawnerEnemy : MonoBehaviour
 			missileScript.missilePrefab = missilePrefab;
 			missileScript.explosionPrefab = explosionPrefab;
 			missileScript.transform.position = transform.position;
-			missileScript.speed = speed;
+			missileScript.speed = GameManager.Instance.getEnemyMissileSpeed();
 			missileScript.noiseAmp = 0.5f;
-			missileScript.noiseScale = 0.001f;
+			missileScript.noiseScale = 0.003f;
 
 			missile.SetActive(false);
 			missiles.Push(missile);
@@ -63,10 +63,10 @@ public class MissileSpawnerEnemy : MonoBehaviour
 				changeTarget();
 
 				GameObject missile = (GameObject) missiles.Pop();
-				missile.transform.Translate(new Vector3(Random.Range(-100, 100), 0, 0));
+				var targetX = target.transform.position.x;
+				missile.transform.Translate(new Vector3(targetX + Random.Range(-50, 50), 0, 0));
 
-				missile.GetComponent<MissileEnemy>().targetPosition = target.transform.position;
-				missile.SetActive(true);
+				missile.GetComponent<MissileEnemy>().Fire(target.transform.position);
 			}
 			else
 			{

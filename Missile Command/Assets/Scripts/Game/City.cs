@@ -43,8 +43,11 @@ public class City : MonoBehaviour {
 		explosionPrefab.SetActive(true);
 	}
 
-	void OnTriggerEnter(Collider other)
+	void OnTriggerEnter(Collider collider)
 	{
-		Explode();
+		if(collider.gameObject.name != "Terrain")
+		{
+			Explode();
+		}
 	}
 }

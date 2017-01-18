@@ -10,10 +10,11 @@ public class MissileEnemy : MonoBehaviour {
 	public float noiseAmp = 0.0f;
 	public float noiseScale = 0.0f;
 
-	public float speed = 4.0f;
+	public float speed = 1.0f;
 	
-	private Vector3 direction;
+	private Vector3 translation;
 	private GameObject explosion;
+	private bool doMove = true;
 
 	// Use this for initialization
 	void Start()
@@ -27,38 +28,53 @@ public class MissileEnemy : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-		StartCoroutine(Fly());
+		if(doMove)
+		{
+			StartCoroutine(Fly());
+		}
 	}
 
 	IEnumerator Fly()
-	{
-		var path = targetPosition - gameObject.transform.position; 
-		direction = Vector3.Normalize(path);
+	{		
+		var position = gameObject.transform.position;
 
-		var noise = noiseAmp * (Mathf.PerlinNoise(path.x * noiseScale, path.y * noiseScale) - 0.5f);
-		var side = new Vector3(0, 0, 1);
-		var modDirection = Vector3.Cross(direction, side);
+		if(Vector3.Distance(position, targetPosition) > 10.0f)
+		{
+			var path = targetPosition - position;
+			var direction = Vector3.Normalize(path);
 
-		var translation = (direction * 3.0f) + (modDirection * noise);
+			var noise = noiseAmp * (Mathf.PerlinNoise(path.x * noiseScale, path.y * noiseScale) - 0.5f);
+			var side = new Vector3(0, 0, 1);
+			var modDirection = Vector3.Cross(direction, side);
 
-		gameObject.transform.GetChild(0).transform.rotation = Quaternion.LookRotation(-translation);
-		gameObject.transform.Translate(translation);
+			translation = direction + (modDirection * noise);
+
+			gameObject.transform.GetChild(0).transform.rotation = Quaternion.LookRotation(-translation);
+		} 
+		
+		gameObject.transform.Translate(translation * speed);
 		
 		yield return null;
 	}
 
+	public void Fire(Vector3 target)
+	{
+		targetPosition = target;
+		translation = Vector3.Normalize(targetPosition - gameObject.transform.position);
+		gameObject.SetActive(true);
+	}
 
 	public void Explode()
 	{
-		Destroy(gameObject);
+		doMove = false;
 		explosion.SetActive(true);
+		gameObject.transform.GetChild(0).gameObject.SetActive(false); // disable missile
 		//GameManager.Instance.EnemyMissilesLiving -= 1;
 	}
 
-	void OnTriggerEnter(Collider other)
+	void OnTriggerEnter(Collider collider)
 	{
 		Explode();
-		Debug.Log("Explode");
 	}
 
 }

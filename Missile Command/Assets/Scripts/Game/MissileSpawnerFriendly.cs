@@ -69,8 +69,11 @@ public class MissileSpawnerFriendly : MonoBehaviour
 		transform.GetChild(0).gameObject.SetActive(false);
 	}
 
-	void OnTriggerEnter(Collider other)
+	void OnTriggerEnter(Collider collider)
 	{
-		Explode();
+		if (collider.gameObject.name != "Terrain")
+		{
+			Explode();
+		}
 	}
 }
