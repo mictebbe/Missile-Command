@@ -11,7 +11,7 @@ public class MissileSpawnerFriendly : MonoBehaviour
 	public GameObject cursor;
 
 	private Vector3 target;
-	private int loadedMissles = 1;
+	private int loadedMissles = 10;
 	private float speed = 4.0f;
 
 	private Stack missiles = new Stack();
