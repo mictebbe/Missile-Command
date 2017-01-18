@@ -27,9 +27,9 @@ public class enemyMissileScript : MonoBehaviour {
         enemyExplosion.transform.localPosition = gameObject.transform.localPosition;
         enemyExplosion.SetActive(false);
 
-        if (enemyExplosion.GetComponent<ExplosionScript>() == null)
+        if (enemyExplosion.GetComponent<Explosion>() == null)
         {
-            enemyExplosion.AddComponent<ExplosionScript>();
+            enemyExplosion.AddComponent<Explosion>();
         }
 
         if (enemyExplosion.GetComponent<ExplosionCollision>() == null)

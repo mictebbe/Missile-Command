@@ -8,7 +8,7 @@ public class MissileSpawnerEnemy : MonoBehaviour
 
 	private GameObject target;
 	private int loadedMissles = 10;
-	private float speed = 1.0f;
+	private float speed = 10.0f;
 	
 	private Stack missiles = new Stack();
 	private ArrayList targets = new ArrayList();
@@ -25,21 +25,21 @@ public class MissileSpawnerEnemy : MonoBehaviour
 		}
 
 		var missileLauncher = GameObject.Find("MissileLauncher").transform;
-		for (var i = 0; i < cities.childCount; ++i)
+		for (var i = 0; i < missileLauncher.childCount; ++i)
 		{
-			GameObject mL = cities.GetChild(i).gameObject;
+			GameObject mL = missileLauncher.GetChild(i).gameObject;
 			targets.Add(mL);
 		}
 
 		/*** Init Missiles *******************************************************/
 		this.speed = GameManager.Instance.getLevel() * 0.6f;
-		for (int i = 0; i <= loadedMissles; i++)
+		for (int i = 0; i < loadedMissles; i++)
 		{
 			GameObject missile = Instantiate(missilePrefab) as GameObject;
 			missile.transform.parent = GameObject.Find("Missiles").transform;
-			missile.AddComponent<MissileScriptEnemy>();
+			missile.AddComponent<MissileEnemy>();
 
-			var missileScript = missile.GetComponent<MissileScriptEnemy>();
+			var missileScript = missile.GetComponent<MissileEnemy>();
 			missileScript.missilePrefab = missilePrefab;
 			missileScript.explosionPrefab = explosionPrefab;
 			missileScript.transform.position = transform.position;
@@ -65,7 +65,7 @@ public class MissileSpawnerEnemy : MonoBehaviour
 				GameObject missile = (GameObject) missiles.Pop();
 				missile.transform.Translate(new Vector3(Random.Range(-100, 100), 0, 0));
 
-				missile.GetComponent<MissileScriptEnemy>().targetPosition = target.transform.position;
+				missile.GetComponent<MissileEnemy>().targetPosition = target.transform.position;
 				missile.SetActive(true);
 			}
 			else

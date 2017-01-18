@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ExplosionScript : MonoBehaviour {
+public class ExplosionOld : MonoBehaviour {
     private ParticleSystem ps;
     // Use this for initialization
     void Start () {

@@ -10,10 +10,9 @@ public class ExplosionCollision : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         // Debug.Log("Missile explodes from Explosion.");
-       
-        if (other.gameObject.GetComponent<enemyMissileScript>() != null)
+        if (other.gameObject.GetComponent<MissileEnemy>() != null)
         {
-            other.gameObject.GetComponent<enemyMissileScript>().Explode();
+            other.gameObject.GetComponent<MissileEnemy>().Explode();
             GameManager.Instance.addToScore("Enemy Missile destroyed");
         }
 
@@ -23,9 +22,6 @@ public class ExplosionCollision : MonoBehaviour {
             GameManager.Instance.addToScore("Helicopter destroyed");
 
         }
-
-
-       
     }
     // Use this for initialization
     void Start () {

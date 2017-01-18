@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MainGameScript : MonoBehaviour {
+public class MainGame : MonoBehaviour {
     public bool gameRunning=false;
 	// Use this for initialization
 	void Start () {

@@ -25,9 +25,9 @@ public class friendlyMissileScript : MonoBehaviour
 		friendlyExplosion.transform.position = explosionPosition;
 		friendlyExplosion.SetActive(false);
 
-		if (friendlyExplosion.GetComponent<ExplosionScript>() == null)
+		if (friendlyExplosion.GetComponent<Explosion>() == null)
 		{
-			friendlyExplosion.AddComponent<ExplosionScript>();
+			friendlyExplosion.AddComponent<Explosion>();
 		}
 
         if (friendlyExplosion.GetComponent<ExplosionCollision>() == null)

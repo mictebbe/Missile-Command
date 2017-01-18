@@ -8,10 +8,10 @@ public class DestroyCity : MonoBehaviour {
     {
        
        
-        if (other.gameObject.GetComponent<enemyMissileScript>() != null)
+        if (other.gameObject.GetComponent<MissileEnemy>() != null)
         {
            // Debug.Log("Missile explodes on City");
-            other.gameObject.GetComponent<enemyMissileScript>().Explode();
+            other.gameObject.GetComponent<MissileEnemy>().Explode();
         }
 
         Explode();
