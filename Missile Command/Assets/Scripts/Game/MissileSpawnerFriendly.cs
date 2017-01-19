@@ -14,12 +14,14 @@ public class MissileSpawnerFriendly : MonoBehaviour
 	private int loadedMissles = 10;
 	private float speed = 4.0f;
 	private bool destroyed = false;
+	private Transform missileStart;
 
 	private Stack missiles = new Stack();
 
 	void Start()
 	{
 		cursor = GameObject.Find("PlayerControls").GetComponent<MouseControls>().cursor;
+		missileStart = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0);
 
 		selfExplosion = Instantiate(selfExplosion) as GameObject;
 		selfExplosion.transform.parent = gameObject.transform;
@@ -36,6 +38,7 @@ public class MissileSpawnerFriendly : MonoBehaviour
 			var missileScript = missile.GetComponent<MissileFriendly>();
 			missileScript.missilePrefab = missilePrefab;
 			missileScript.explosionPrefab = explosionPrefab;
+
 			missileScript.transform.position = transform.position;
 			missileScript.speed = speed;
 			missileScript.noiseAmp = 1.2f;
@@ -54,7 +57,9 @@ public class MissileSpawnerFriendly : MonoBehaviour
 				if (missiles.Count > 0)
 				{
 					GameObject missile = (GameObject) missiles.Pop();
-					missile.GetComponent<MissileFriendly>().targetPosition = cursor.transform.position;
+					var missileComponent = missile.GetComponent<MissileFriendly>();
+					missileComponent.targetPosition = cursor.transform.position;
+					missileComponent.transform.position = missileStart.transform.position;
 					missile.SetActive(true);			
 				}
 				else

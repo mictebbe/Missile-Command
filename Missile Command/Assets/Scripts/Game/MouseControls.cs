@@ -9,6 +9,7 @@ public class MouseControls : MonoBehaviour
 
 	public Texture2D cursorTexture;
 	private float cursorSize = 40.0f;
+	private GameObject missileLaunchers;
 
 
 	Camera cam;
@@ -18,6 +19,9 @@ public class MouseControls : MonoBehaviour
 
 		Cursor.visible = false;
 		cam = GetComponent<Camera>();
+
+		missileLaunchers = GameObject.Find("MissileLauncher");
+
 
 	}
 
@@ -34,6 +38,30 @@ public class MouseControls : MonoBehaviour
 			pointOnPlane = ray.GetPoint(distance);
 		}
 		cursor.transform.position = pointOnPlane;
+
+		for(var i = 0; i < missileLaunchers.transform.childCount; ++i)
+		{
+		
+			var mL = missileLaunchers.transform.GetChild(i);
+			var rumpf = mL.transform.GetChild(0).GetChild(0);
+			var rohr = rumpf.GetChild(0);
+
+			pointOnPlane.z -= 50;
+			var direction = Vector3.Normalize(pointOnPlane - mL.transform.position);
+			var rotation = Quaternion.LookRotation(direction);
+
+			var eulerRotationX = rotation.eulerAngles;
+			eulerRotationX.y =  180.0f - eulerRotationX.y;
+			eulerRotationX.z = 0;
+
+			var eulerRotationY = rotation.eulerAngles;
+			eulerRotationY.y *= -1;
+			eulerRotationY.x = 0;
+			eulerRotationY.z = 0;
+
+			rumpf.transform.rotation = Quaternion.Euler(eulerRotationY);
+			rohr.transform.rotation = Quaternion.Euler(eulerRotationX);
+		}
 
 
 	}
