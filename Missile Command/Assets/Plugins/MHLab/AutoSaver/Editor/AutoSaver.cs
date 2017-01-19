@@ -38,7 +38,7 @@ public class AutoSaver
         if (activeScene.isDirty)
         {
             EditorSceneManager.SaveScene(activeScene);
-            if (AutosaveAssets) EditorApplication.SaveAssets();
+            if (AutosaveAssets) AssetDatabase.SaveAssets();
             if (IsDebugEnabled) Debug.Log("AutoSaver: " + activeScene.name + " saved successfully!");
         }
     }

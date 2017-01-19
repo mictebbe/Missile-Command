@@ -1,7 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
 
-public class StartScreenGui : MonoBehaviour {
+
+public class StartScreenGui : UnityEvent<string>
+{
 
     void Awake()
     {
@@ -21,7 +24,7 @@ public class StartScreenGui : MonoBehaviour {
 
 
 
-    private void startGame()
+    public void startGame()
     {
 
       
