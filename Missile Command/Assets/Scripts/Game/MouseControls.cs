@@ -1,25 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MouseControls : MonoBehaviour {
+public class MouseControls : MonoBehaviour
+{
 
-    Camera cam;
-    public GameObject cursor;
-    void Start()
-    {
-        cam = GetComponent<Camera>();
-    }
+	public GameObject cursor;
+	public GameObject cursorPlane;
 
-    void Update()
-    {
-        Vector2 mousePosition = Input.mousePosition;
-				Vector3 cfPosition = GameObject.Find("Cursor Plane").transform.position;
-				Ray ray = cam.ScreenPointToRay(new Vector3(mousePosition.x, mousePosition.y, cfPosition.z));
-				
-				float camCFDistance = Vector3.Distance(cfPosition, cam.transform.position);
-				Vector3 p = ray.GetPoint(camCFDistance);
+	Camera cam;
 
-				cursor.transform.position = p;
-				//cursor.transform.Translate(new Vector3(Input.GetAxis("Mouse X")*10, Input.GetAxis("Mouse Y")*10, 0));
+	void Start()
+	{
+		cam = GetComponent<Camera>();
+	}
+
+	void Update()
+	{
+
+		Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+		Plane p = new Plane(cursorPlane.transform.up, cursorPlane.transform.position);
+
+		float distance;
+		Vector3 pointOnPlane = new Vector3(0,0,0);
+		if (p.Raycast(ray, out distance))
+		{
+			pointOnPlane = ray.GetPoint(distance);
+		}
+		cursor.transform.position = pointOnPlane;
 	}
 }

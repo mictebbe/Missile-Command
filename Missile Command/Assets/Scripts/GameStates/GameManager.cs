@@ -235,11 +235,11 @@ public class GameManager : MonoBehaviour
 		{
 			endGame();
 		}
-		object leftEnemyMissiles = GameObject.Find("MissilesEnemy").transform.childCount;
-		if(leftEnemyMissiles != null)
+		var missilesEnemy = GameObject.Find("MissilesEnemy");
+		if(missilesEnemy != null)
 		{
-			int num = (int)leftEnemyMissiles;
-			if (num <= 0)
+			int leftEnemyMissiles = missilesEnemy.transform.childCount;
+			if (leftEnemyMissiles <= 0)
 			{
 				goToNextLevel();
 			}
