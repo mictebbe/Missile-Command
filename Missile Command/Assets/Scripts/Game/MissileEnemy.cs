@@ -74,7 +74,12 @@ public class MissileEnemy : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collider)
 	{
-		Explode();
+		var name = collider.gameObject.name;
+		if (name != "CursorPlane" && name != "MissileEnemy(Clone)" && name != "Cursor")
+		{
+			Explode();
+		}
+
 	}
 
 }

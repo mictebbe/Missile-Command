@@ -13,6 +13,7 @@ public class MissileSpawnerFriendly : MonoBehaviour
 	private Vector3 target;
 	private int loadedMissles = 10;
 	private float speed = 4.0f;
+	private bool destroyed = false;
 
 	private Stack missiles = new Stack();
 
@@ -48,7 +49,7 @@ public class MissileSpawnerFriendly : MonoBehaviour
 
 	void Update()
 	{
-		if (Input.GetKeyDown(buttonNumber) && !GameManager.Instance.isDestroyed())
+		if (Input.GetKeyDown(buttonNumber) && !GameManager.Instance.isDestroyed() && !destroyed)
 		{
 				if (missiles.Count > 0)
 				{
@@ -65,6 +66,7 @@ public class MissileSpawnerFriendly : MonoBehaviour
 
 	void Explode()
 	{
+		destroyed = true;
 		selfExplosion.SetActive(true);
 		transform.GetChild(0).gameObject.SetActive(false);
 	}
