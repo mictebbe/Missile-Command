@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: b2340722503216c4eb0728c98ed185b9
+timeCreated: 1484835935
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Petitinho
+  fontNames:
+  - Petitinho
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
