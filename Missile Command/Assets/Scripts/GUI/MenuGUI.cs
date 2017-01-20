@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class MenuManager : MonoBehaviour
+public class MenuGUI : MonoBehaviour
 {
 
     string name = "";

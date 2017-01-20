@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
 	//friendlyMissilesLiving is the sum of shots the player has left from all launchers.
 	public int friendlyMissilesLiving;
 
-	private bool gameEnded = false;
+    private bool gameEnded = false;
+
 
 
 	// Creates an instance of gamestate as a gameobject if an instance does not exist
@@ -172,7 +173,7 @@ public class GameManager : MonoBehaviour
 		{
 			case ScoreState.missileDestroyed:
 				this.score += 25;
-				Debug.Log("Enemy Missile destroyed");
+			
 				break;
 			case ScoreState.heliDestroyed:
 				this.score += 50;
@@ -277,7 +278,7 @@ public class GameManager : MonoBehaviour
 		if (!gameEnded)
 		{
 			gameEnded = true;
-			LevelGenerator.Instance.showEndScreen();
+			//LevelGenerator.Instance.showEndScreen();
 		}
 	}
 
@@ -285,4 +286,11 @@ public class GameManager : MonoBehaviour
 	{
 		return 1.0f + 0.1f * activeLevel;
 	}
+
+    public bool hasGameEnded()
+    {
+        //return true;
+        return gameEnded;
+
+    }
 }

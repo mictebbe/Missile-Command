@@ -64,7 +64,7 @@ public class MissileSpawnerFriendly : MonoBehaviour
 				}
 				else
 				{
-					Debug.Log("No missiles left in Missile Launcher '" + gameObject.name + "'");
+					//Debug.Log("No missiles left in Missile Launcher '" + gameObject.name + "'");
 				}		
 		}
 	}

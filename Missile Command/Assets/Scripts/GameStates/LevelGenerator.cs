@@ -63,10 +63,14 @@ public class LevelGenerator : MonoBehaviour {
 
     }
 
+    public void showHighscores()
+    {
+        SceneManager.LoadScene("Highscores");
+
+    }
+
     public void showOptions()
     {
-        //SceneManager.LoadScene("Options");
-        //TODO: Show options overlay
-        Debug.Log("not implemented yet.");
+        SceneManager.LoadScene("Options");
     }
 }
