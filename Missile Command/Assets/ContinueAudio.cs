@@ -6,8 +6,6 @@ public class ContinueAudio : MonoBehaviour {
     private AudioSource AudioSourceBGM;
     private AudioSource AudioSourceAtmo;
 
-    private AudioListener AudioListener_;
-
     // Declare properties
     public static ContinueAudio instance;
     // Creates an instance of gamestate as a gameobject if an instance does not exist

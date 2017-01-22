@@ -15,10 +15,12 @@ public class MissileSpawnerFriendly : MonoBehaviour
     public AudioClip emptySound1;
     public AudioClip emptySound2;
 
-    List<AudioClip> sounds = new List<AudioClip>();
+	public AudioClip explosionSound;
+
+	List<AudioClip> sounds = new List<AudioClip>();
    
 
-		AudioSource audio;
+	AudioSource audio;
     
     public UnityEngine.KeyCode buttonNumber = KeyCode.A;
 	public GameObject cursor;

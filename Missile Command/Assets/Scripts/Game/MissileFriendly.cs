@@ -76,16 +76,13 @@ public class MissileFriendly : MonoBehaviour
 	void Explode()
 	{
 		explosion.SetActive(true);
-       
-
         //transform.GetChild(0).gameObject.SetActive(false);
 	}
 
 	void OnTriggerEnter(Collider collider)
 	{
 		if(collider.gameObject.name == "MissileEnemy(Clone)")
-		{
-			
+		{	
 			GameManager.instance.addToScore(ScoreState.missileDestroyed);
 			Explode();
 		}
