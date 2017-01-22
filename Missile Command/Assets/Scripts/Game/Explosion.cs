@@ -25,14 +25,6 @@ public class Explosion : MonoBehaviour {
 	}
 	
 	void Update () {
-		if (ps)
-		{
-
-           // transform.GetComponent<>
-			if (!ps.IsAlive())
-			{
-				Destroy(transform.parent.gameObject);	
-			}
-		}
+	
 	}
 }

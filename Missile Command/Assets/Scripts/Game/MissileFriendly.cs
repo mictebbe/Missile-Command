@@ -16,15 +16,17 @@ public class MissileFriendly : MonoBehaviour
 	private GameObject explosion;
 	private bool once = true;
 	private bool moving = true;
-   
-    void Start()
-	{
-        
 
+	public ParticleSystem smoke;
+
+	void Start()
+	{
         explosion = Instantiate(explosionPrefab) as GameObject;
 		explosion.transform.parent = gameObject.transform;
 		explosion.transform.localPosition = new Vector3(0, 0, 0);
 		explosion.SetActive(false);
+
+		smoke = GetComponentInChildren<ParticleSystem>();
 	}
 
 	void Update()
@@ -32,6 +34,13 @@ public class MissileFriendly : MonoBehaviour
 		if (moving)
 		{
 			StartCoroutine(Fly());
+		}
+		if (smoke)
+		{
+			if (!smoke.IsAlive())
+			{
+				Destroy(gameObject);
+			}
 		}
 	}
 
@@ -60,7 +69,6 @@ public class MissileFriendly : MonoBehaviour
 			moving = false;
             Destroy(transform.GetChild(0).gameObject);
             Explode();
-
 		}
 		yield return null;
 	}
