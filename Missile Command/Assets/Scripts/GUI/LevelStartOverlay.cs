@@ -7,7 +7,10 @@ public class LevelStartOverlay : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
+        var Text = "Level " + GameManager.Instance.getLevel();
+        var guiText = gameObject.GetComponent<Text>();
+        guiText.text = Text;
+        gameObject.SetActive(true);
         StartCoroutine(ShowOverlay());
     }
 	
@@ -19,11 +22,9 @@ public class LevelStartOverlay : MonoBehaviour {
 
     IEnumerator ShowOverlay()
     {
-        var Text = "Level "+GameManager.Instance.getLevel();
-        var guiText = gameObject.GetComponent<Text>();
-        guiText.text = Text;
+       //
 
-        gameObject.SetActive(true);
+       
         yield return new WaitForSeconds(2.5f);
         gameObject.SetActive(false);
         

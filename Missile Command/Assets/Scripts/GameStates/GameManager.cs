@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 	public static GameManager instance;
 
 
-    private float initialEnemySpeed = 10f;
+    private float initialEnemySpeed = 40f;
 	// Declare properties
 	private int activeLevel; 
 	private int score = 0;

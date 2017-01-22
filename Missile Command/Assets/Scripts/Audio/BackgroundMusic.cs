@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class BackgroundMusic : MonoBehaviour {
-    private AudioSource AudioSource;
-    private AudioClip levelBackgroundMusic;
-    private AudioClip menuBackgroundMusic;
+    private AudioSource audioSource;
+    public AudioClip levelBackgroundMusic;
+    public AudioClip menuBackgroundMusic;
     private Object[] clips;
 
 
@@ -19,7 +19,7 @@ public class BackgroundMusic : MonoBehaviour {
         {
             if (instance == null)
             {
-                instance = new GameObject("ContinueAudio").AddComponent<BackgroundMusic>();
+                instance = new GameObject("BackgroundMusic").AddComponent<BackgroundMusic>();
                 
             }
             return instance;
@@ -30,8 +30,8 @@ public class BackgroundMusic : MonoBehaviour {
     void Awake()
     {
 
-       
-        Debug.Log("Awake");
+      
+
         //Check if instance already exists
         if (instance == null)
         {
@@ -55,31 +55,23 @@ public class BackgroundMusic : MonoBehaviour {
     }
     // Use this for initialization
     void Start () {
-        gameObject.AddComponent<AudioSource>();
+        DontDestroyOnLoad(gameObject);
+        //gameObject.AddComponent<AudioSource>();
         
-        AudioSource[] sounds = gameObject.GetComponents<AudioSource>(); ;
-        clips = Resources.LoadAll("Sounds/BackgroundMusic");
-        foreach (Object current in clips)
-        {
-            Debug.Log("clips"+current.name);
-
-        }
-        foreach (AudioSource current in sounds)
-        {
-            Debug.Log("AudioSoures"+current.name);
-
-        }
-        AudioSource= sounds[0];
-        AudioSource.playOnAwake = true;
-        AudioSource.loop = true;
-        AudioSource.volume = 0.5f;
+        audioSource = gameObject.GetComponent<AudioSource>();
+       
+        audioSource.playOnAwake = true;
+        audioSource.clip = menuBackgroundMusic;
+        audioSource.loop = true;
+        audioSource.volume = 1f;
 
         //AudioSourceAtmo = sounds[1];
         //AudioSourceAtmo.playOnAwake = false;
         //AudioSourceAtmo.loop = true;
         //AudioSourceAtmo.volume = 0.5f;
 
-
+        Debug.Log(audioSource.clip.name);
+        Debug.Log(menuBackgroundMusic.name);
     }
 
      
@@ -94,23 +86,23 @@ void OnDisable()
     //Tell our 'OnLevelFinishedLoading' function to stop listening for a scene change as soon as this script is disabled. Remember to always have an unsubscription for every delegate you subscribe to!
     SceneManager.sceneLoaded -= OnLevelFinishedLoading;
 }
-    public AudioSource[] sounds;
+   
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
 {
         if (scene.name == "Level1")
         {
 
             //AudioSourceAtmo.Play();
-            if (AudioSource.clip.name != levelBackgroundMusic.name)
+            if (audioSource.clip.name != levelBackgroundMusic.name)
             {
-                AudioSource.clip = levelBackgroundMusic;
+                audioSource.clip = levelBackgroundMusic;
             }
         }
         else
         {
-            if (AudioSource.clip.name != menuBackgroundMusic.name)
+            if (audioSource.clip.name != menuBackgroundMusic.name)
             {
-                AudioSource.clip = menuBackgroundMusic;
+             audioSource.clip = menuBackgroundMusic;
             }
 
 
