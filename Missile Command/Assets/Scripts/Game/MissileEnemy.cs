@@ -56,8 +56,7 @@ public class MissileEnemy : MonoBehaviour
 				translation = direction + (modDirection * noise);
 
 				gameObject.transform.GetChild(0).transform.rotation = Quaternion.LookRotation(-translation);
-			}
-			speed = 200.0f;
+			}	
 			gameObject.transform.Translate(translation * speed * Time.deltaTime);
 
 			lowPass.cutoffFrequency = Mathf.Lerp(0, 22000, 1 - (position - targetPosition).magnitude / (initialPosition - targetPosition).magnitude);
