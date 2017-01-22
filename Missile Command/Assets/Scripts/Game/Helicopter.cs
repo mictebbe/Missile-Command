@@ -16,7 +16,7 @@ public class Helicopter : MonoBehaviour {
         startPos = transform.position;
 
 		AudioSource audio = GetComponent<AudioSource>();
-		audio.Play();
+		audio.Play(-3000);
 
 	}
 	
