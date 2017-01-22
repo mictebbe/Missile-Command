@@ -9,8 +9,12 @@ public class City : MonoBehaviour {
     public AudioClip explosionSound1;
     public AudioClip explosionSound2;
     public AudioClip explosionSound3;
+    private Light levelStartLight;
     AudioSource audio;
     void Start () {
+        levelStartLight = gameObject.transform.FindChild("Directional light").GetComponent<Light>();
+        levelStartLight.enabled = false;
+        levelStartLight.intensity = 0;
         audio = GetComponent<AudioSource>();
         sounds.Add(explosionSound1);
         sounds.Add(explosionSound2);
@@ -23,6 +27,7 @@ public class City : MonoBehaviour {
         {
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
             gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            StartCoroutine(levelStartLights());
         }
 
 		explosionPrefab = Instantiate(explosionPrefab) as GameObject;
@@ -66,4 +71,28 @@ public class City : MonoBehaviour {
 			Explode();
 		}
 	}
+
+    IEnumerator levelStartLights()
+    {
+       
+        for (int j = 0; j < 2; j++) {
+            levelStartLight.enabled = true;
+            for (float i = 0.0f; i < 8; i += 1.5f)
+            {
+               
+                levelStartLight.intensity = i;
+               yield return null;
+            }
+
+
+            yield return new WaitForSeconds(0.3f);
+            levelStartLight.enabled = false;
+            Debug.Log("   " + j);
+            yield return new WaitForSeconds(0.3f);
+        }
+
+
+
+
+    }
 }

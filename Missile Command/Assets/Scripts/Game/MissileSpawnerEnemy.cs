@@ -85,6 +85,8 @@ public class MissileSpawnerEnemy : MonoBehaviour
 
     IEnumerator ShootMissiles()
     {
+
+        yield return new WaitForSeconds(2);
         while (missiles.Count > 0 && !GameManager.Instance.isDestroyed()) {
 
             changeTarget();
