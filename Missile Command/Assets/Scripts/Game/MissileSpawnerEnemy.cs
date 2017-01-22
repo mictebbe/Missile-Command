@@ -9,15 +9,18 @@ public class MissileSpawnerEnemy : MonoBehaviour
 	private GameObject target;
 	private int loadedMissles = 10;
 	private float speed = 1.0f;
-	
-	private Stack missiles = new Stack();
+    private float timeUntilShot = 0;
+
+    private Stack missiles = new Stack();
 	private ArrayList targets = new ArrayList();
 	
 	// Use this for initialization
 	void Start ()
 	{
-		/*** Init Targets *******************************************************/
-		var cities = GameObject.Find("Cities").transform;
+        changeTimeUntilShot();
+
+        /*** Init Targets *******************************************************/
+        var cities = GameObject.Find("Cities").transform;
 		for (var i = 0; i < cities.childCount; ++i)
 		{
 			GameObject city = cities.GetChild(i).gameObject;
@@ -50,29 +53,14 @@ public class MissileSpawnerEnemy : MonoBehaviour
 			missile.SetActive(false);
 			missiles.Push(missile);
 		}
+        StartCoroutine(ShootMissiles());
 
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Time.frameCount % 60 == 0 && !GameManager.Instance.isDestroyed())
-		{
-			if (missiles.Count > 0)
-			{
-				changeTarget();
-
-				GameObject missile = (GameObject) missiles.Pop();
-				var targetX = target.transform.position.x;
-				missile.transform.Translate(new Vector3(targetX + Random.Range(-80, 80), 0, 0));
-
-				missile.GetComponent<MissileEnemy>().Fire(target.transform.position);
-			}
-			else
-			{
-				//Debug.Log("No missiles left in Missile Launcher '" + gameObject.name + "'");
-			}
-		}
+		
 
 	}
 
@@ -88,4 +76,30 @@ public class MissileSpawnerEnemy : MonoBehaviour
 			targets.Remove(target);
 		}
 	}
+
+    public void changeTimeUntilShot()
+    {
+        timeUntilShot=UnityEngine.Random.Range(0.6f, 3);
+
+    }
+
+    IEnumerator ShootMissiles()
+    {
+        while (missiles.Count > 0 && !GameManager.Instance.isDestroyed()) {
+
+            changeTarget();
+
+
+            GameObject missile = (GameObject)missiles.Pop();
+
+            var targetX = target.transform.position.x;
+
+            missile.transform.Translate(new Vector3(targetX + Random.Range(-80, 80), 0, 0));
+            missile.GetComponent<MissileEnemy>().Fire(target.transform.position);
+            changeTimeUntilShot();
+            yield return new WaitForSeconds(timeUntilShot);
+        }
+        
+
+    }
 }

@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour
 		
 	// Declare properties
 	public static GameManager instance;
-	
+
+
+    private float initialEnemySpeed = 40f;
 	// Declare properties
 	private int activeLevel; 
 	private int score = 0;
@@ -29,12 +31,13 @@ public class GameManager : MonoBehaviour
 	public int friendlyMissilesLiving;
 
     private bool gameEnded = false;
+    private bool scoreChanged = false;
 
+    
 
-
-	// Creates an instance of gamestate as a gameobject if an instance does not exist
-	// ---------------------------------------------------------------------------------------------------
-	public static GameManager Instance
+    // Creates an instance of gamestate as a gameobject if an instance does not exist
+    // ---------------------------------------------------------------------------------------------------
+    public static GameManager Instance
 	{
 		get
 		{
@@ -149,8 +152,9 @@ public class GameManager : MonoBehaviour
 		var name = cityToDestroy.name;
 		var cityIndex = name.Substring(name.Length - 1, 1);
 		int idx = Convert.ToInt32(cityIndex) - 1;
-		
-		citiesDestroyed[idx] = true;
+        
+        
+        citiesDestroyed[idx] = true;
 	}
 
 	public bool isCityDestroyed(GameObject cityToDestroy)
@@ -169,6 +173,7 @@ public class GameManager : MonoBehaviour
 
 	public void addToScore(ScoreState state)
 	{
+        scoreChanged = true;
 		switch (state)
 		{
 			case ScoreState.missileDestroyed:
@@ -203,13 +208,14 @@ public class GameManager : MonoBehaviour
 
 		activeLevel += 1;
 
-		for (int i = 0; i < (score - lastLevelScore) / 10000; i++)
+		for (int i = 0; i < (int)(score - lastLevelScore) / 10000; i++)
 		{
 			reviveCity();
 		}
 		lastLevelScore = score;
 		resetMissiles();
 		initLevel();
+        gameEnded = false;
 	}
 
 	void countLevelScore()
@@ -284,13 +290,23 @@ public class GameManager : MonoBehaviour
 
 	public float getEnemyMissileSpeed()
 	{
-		return 1.0f + 0.1f * activeLevel;
+		return initialEnemySpeed + 1f * activeLevel;
 	}
+
+
 
     public bool hasGameEnded()
     {
         //return true;
         return gameEnded;
+
+    }
+
+    public bool hasScoreChanged()
+    {
+        var returnValue = scoreChanged;
+        scoreChanged = false;
+        return returnValue;
 
     }
 }

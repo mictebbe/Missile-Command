@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Score : MonoBehaviour {
     private int scoreText;
     private Text guiText;
+   
     // Use this for initialization
     void Start () {
         scoreText = GameManager.Instance.getScore();
@@ -14,8 +15,11 @@ public class Score : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        scoreText = GameManager.Instance.getScore();
+        if (GameManager.Instance.hasScoreChanged())
+        {
+            scoreText = GameManager.Instance.getScore();
 
-        gameObject.GetComponent<Text>().text = ""+scoreText;
+            gameObject.GetComponent<Text>().text = "" + scoreText;
+        }
     }
 }

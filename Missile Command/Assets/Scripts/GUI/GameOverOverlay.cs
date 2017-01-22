@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class GameOverOverlay : MonoBehaviour {
-    Canvas canvas;
+    Text canvas;
    
     public RawImage blendPlane;
     int drawDepth = -1000;
@@ -13,17 +13,17 @@ public class GameOverOverlay : MonoBehaviour {
     Color ColorB = new Color(0, 0, 0, 1);
     // Use this for initialization
     void Start () {
-        canvas = gameObject.GetComponent<Canvas>();
+        canvas = gameObject.GetComponent<Text>();
         canvas.enabled=false;
     }
 	
 	
 	void Update () {
-        if (GameManager.Instance.hasGameEnded())
+        if (!GameManager.Instance.hasGameEnded())
+            return;
         {
-            Debug.Log("WHAAAS?");
-            StartCoroutine(blendScreen());
-            StartCoroutine(endGame());
+          
+           StartCoroutine(endGame());
            
         }
 	}
@@ -35,6 +35,7 @@ public class GameOverOverlay : MonoBehaviour {
         canvas.enabled = true;
         //blend();
         yield return new WaitForSeconds(3);
+
         LevelGenerator.Instance.showEndScreen();
     }
 

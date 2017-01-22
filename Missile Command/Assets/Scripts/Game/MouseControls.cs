@@ -30,6 +30,7 @@ public class MouseControls : MonoBehaviour
 
 		Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 		Plane p = new Plane(cursorPlane.transform.up, cursorPlane.transform.position);
+       // cam.transform.forward=cursor.transform.position;
 
 		float distance;
 		Vector3 pointOnPlane = new Vector3(0, 0, 0);

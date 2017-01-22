@@ -5,8 +5,8 @@ using UnityEngine;
 public class HighscoresGUI : MonoBehaviour {
     void Awake()
     {
-        
        
+
 
     }
     // Use this for initialization

@@ -1,18 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class MissileSpawnerFriendly : MonoBehaviour
 {
 	public GameObject missilePrefab;
 	public GameObject explosionPrefab;
 	public GameObject selfExplosion;
+    public AudioClip launchSound1;
+    public AudioClip launchSound2;
+    public AudioClip launchSound3;
+    public AudioClip launchSound4;
+    public AudioClip launchSound5;
 
-	public UnityEngine.KeyCode buttonNumber = KeyCode.A;
+    public AudioClip emptySound1;
+    public AudioClip emptySound2;
+
+    List<AudioClip> sounds = new List<AudioClip>();
+   
+
+		AudioSource audio;
+    
+    public UnityEngine.KeyCode buttonNumber = KeyCode.A;
 	public GameObject cursor;
 
 	private Vector3 target;
 	private int loadedMissles = 10;
-	private float speed = 4.0f;
+	private float speed = 200.0f;
 	private bool destroyed = false;
 	private Transform missileStart;
 
@@ -20,7 +33,15 @@ public class MissileSpawnerFriendly : MonoBehaviour
 
 	void Start()
 	{
-		cursor = GameObject.Find("PlayerControls").GetComponent<MouseControls>().cursor;
+        audio = GetComponent<AudioSource>();
+        sounds.Add(launchSound1);
+        sounds.Add(launchSound2);
+        sounds.Add(launchSound3);
+        sounds.Add(launchSound4);
+        sounds.Add(launchSound5);
+        sounds.Add(emptySound1);
+        sounds.Add(emptySound2);
+        cursor = GameObject.Find("PlayerControls").GetComponent<MouseControls>().cursor;
 		missileStart = transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0);
 
 		selfExplosion = Instantiate(selfExplosion) as GameObject;
@@ -56,16 +77,22 @@ public class MissileSpawnerFriendly : MonoBehaviour
 		{
 				if (missiles.Count > 0)
 				{
+                 
 					GameObject missile = (GameObject) missiles.Pop();
 					var missileComponent = missile.GetComponent<MissileFriendly>();
 					missileComponent.targetPosition = cursor.transform.position;
 					missileComponent.transform.position = missileStart.transform.position;
-					missile.SetActive(true);			
-				}
+					missile.SetActive(true);
+                var idx = Mathf.FloorToInt(UnityEngine.Random.Range(0, 4.99f));
+                audio.clip = sounds[idx];
+                audio.Play();
+            }
 				else
 				{
-					//Debug.Log("No missiles left in Missile Launcher '" + gameObject.name + "'");
-				}		
+                var idx = Mathf.FloorToInt(UnityEngine.Random.Range(5, 6.99f));
+                audio.clip = sounds[idx];
+                audio.Play();
+            }		
 		}
 	}
 
