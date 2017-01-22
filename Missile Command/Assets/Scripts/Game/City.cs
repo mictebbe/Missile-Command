@@ -87,7 +87,7 @@ public class City : MonoBehaviour {
 
             yield return new WaitForSeconds(0.3f);
             levelStartLight.enabled = false;
-            Debug.Log("   " + j);
+           
             yield return new WaitForSeconds(0.3f);
         }
 

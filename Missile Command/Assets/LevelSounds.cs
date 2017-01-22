@@ -2,21 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndScreenGUI : MonoBehaviour {
+public class LevelSounds : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Cursor.visible = true;
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
-
-    public void goToHighscores()
-    {
-        LevelGenerator.Instance.showHighscores();   
-
-    }
 }

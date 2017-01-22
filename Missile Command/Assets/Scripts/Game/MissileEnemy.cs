@@ -60,7 +60,7 @@ public class MissileEnemy : MonoBehaviour
 			gameObject.transform.Translate(translation * speed * Time.deltaTime);
 
 			lowPass.cutoffFrequency = Mathf.Lerp(0, 22000, 1 - (position - targetPosition).magnitude / (initialPosition - targetPosition).magnitude);
-			//Debug.Log(lowPass.cutoffFrequency );
+			
 		}
 		if (smoke)
 		{
@@ -128,7 +128,7 @@ public class MissileEnemy : MonoBehaviour
 
 		if (name != "CursorPlane" && name != "MissileEnemy(Clone)" && name != "Cursor")
 		{
-			Debug.Log(name);
+			
 			Explode();
 		}
 

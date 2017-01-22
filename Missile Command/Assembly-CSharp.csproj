@@ -48,11 +48,11 @@
   <ItemGroup>
      <Compile Include="Assets\Addons\Fx Explosion Pack\Script\DestroyEffect.cs" />
      <Compile Include="Assets\Addons\Fx Explosion Pack\Script\csLightControl.cs" />
-     <Compile Include="Assets\ContinueAudio.cs" />
-     <Compile Include="Assets\EndScreenGUI.cs" />
-     <Compile Include="Assets\MoveSkybox.cs" />
-     <Compile Include="Assets\PostProcessingEffects.cs" />
-     <Compile Include="Assets\Scripts\DollyZoom.cs" />
+     <Compile Include="Assets\LevelSounds.cs" />
+     <Compile Include="Assets\Scripts\Audio\BackgroundMusic.cs" />
+     <Compile Include="Assets\Scripts\Effects\DollyZoom.cs" />
+     <Compile Include="Assets\Scripts\Effects\MoveSkybox.cs" />
+     <Compile Include="Assets\Scripts\Effects\PostProcessingEffects.cs" />
      <Compile Include="Assets\Scripts\GUI\EndScreenGUI.cs" />
      <Compile Include="Assets\Scripts\GUI\GameOverOverlay.cs" />
      <Compile Include="Assets\Scripts\GUI\HighscoresGUI.cs" />

@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class ContinueAudio : MonoBehaviour {
-    private AudioSource AudioSourceBGM;
-    private AudioSource AudioSourceAtmo;
+public class BackgroundMusic : MonoBehaviour {
+    private AudioSource AudioSource;
+    private AudioClip levelBackgroundMusic;
+    private AudioClip menuBackgroundMusic;
+    private Object[] clips;
+
 
     // Declare properties
-    public static ContinueAudio instance;
+    public static BackgroundMusic instance;
     // Creates an instance of gamestate as a gameobject if an instance does not exist
     // ---------------------------------------------------------------------------------------------------
-    public static ContinueAudio Instance
+    public static BackgroundMusic Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = new GameObject("ContinueAudio").AddComponent<ContinueAudio>();
+                instance = new GameObject("ContinueAudio").AddComponent<BackgroundMusic>();
                 
             }
             return instance;
@@ -26,6 +29,8 @@ public class ContinueAudio : MonoBehaviour {
     //Awake is always called before any Start functions
     void Awake()
     {
+
+       
         Debug.Log("Awake");
         //Check if instance already exists
         if (instance == null)
@@ -46,18 +51,35 @@ public class ContinueAudio : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
 
         //Call the InitGame function to initialize the first level 
-        //startState();
+        
     }
     // Use this for initialization
     void Start () {
-        //gameObject.AddComponent<AudioSource>();
-        //gameObject.AddComponent<AudioSource>();
-        //gameObject.AddComponent<AudioListener>();
-        //AudioSourceBGM = gameObject.GetComponent<AudioSource>();
-        //AudioSourceAtmo= gameObject.GetComponent<AudioSource>()
-        //AudioListener_ = gameObject.GetComponent<AudioListener>();
-       
-    
+        gameObject.AddComponent<AudioSource>();
+        
+        AudioSource[] sounds = gameObject.GetComponents<AudioSource>(); ;
+        clips = Resources.LoadAll("Sounds/BackgroundMusic");
+        foreach (Object current in clips)
+        {
+            Debug.Log("clips"+current.name);
+
+        }
+        foreach (AudioSource current in sounds)
+        {
+            Debug.Log("AudioSoures"+current.name);
+
+        }
+        AudioSource= sounds[0];
+        AudioSource.playOnAwake = true;
+        AudioSource.loop = true;
+        AudioSource.volume = 0.5f;
+
+        //AudioSourceAtmo = sounds[1];
+        //AudioSourceAtmo.playOnAwake = false;
+        //AudioSourceAtmo.loop = true;
+        //AudioSourceAtmo.volume = 0.5f;
+
+
     }
 
      
@@ -77,9 +99,26 @@ void OnDisable()
 {
         if (scene.name == "Level1")
         {
-            sounds = gameObject.GetComponents<AudioSource>();
-            sounds[0].Play();
+
+            //AudioSourceAtmo.Play();
+            if (AudioSource.clip.name != levelBackgroundMusic.name)
+            {
+                AudioSource.clip = levelBackgroundMusic;
+            }
         }
+        else
+        {
+            if (AudioSource.clip.name != menuBackgroundMusic.name)
+            {
+                AudioSource.clip = menuBackgroundMusic;
+            }
+
+
+        }
+
+
+
+
     Debug.Log("Level Loaded");
     Debug.Log(scene.name);
     Debug.Log(mode);
@@ -87,6 +126,5 @@ void OnDisable()
 
 
     
-	
 	
 }
