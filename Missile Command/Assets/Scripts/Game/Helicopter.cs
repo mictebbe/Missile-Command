@@ -19,12 +19,7 @@ public class Helicopter : MonoBehaviour
 		startPos = transform.position;
 
 		AudioSource audio = GetComponent<AudioSource>();
-
-
 		startTime = Random.Range(0, 5);
-
-		flying = true;
-		audio.Play();
 
 		if (GameManager.Instance.getLevel() % 5 == 0)
 		{
