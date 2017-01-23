@@ -53,7 +53,7 @@ public class Helicopter : MonoBehaviour
 		yield return new WaitForSeconds(startTime);
 		while (flying)
 		{
-			transform.position += transform.forward * (-0.5f) * Time.deltaTime;
+			transform.position += transform.forward * (-0.3f) * Time.deltaTime;
 
 			var noise = 0.001f * (Mathf.PerlinNoise(Time.time * 0.12f, 0) - 0.5f);
 			transform.Rotate(new Vector3(0, 0, noise));
