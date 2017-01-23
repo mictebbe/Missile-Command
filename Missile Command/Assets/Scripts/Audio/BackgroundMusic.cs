@@ -58,7 +58,7 @@ public class BackgroundMusic : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         //gameObject.AddComponent<AudioSource>();
         
-        audioSource = gameObject.GetComponent<AudioSource>();
+       
        
         audioSource.playOnAwake = true;
         audioSource.clip = menuBackgroundMusic;
@@ -70,6 +70,7 @@ public class BackgroundMusic : MonoBehaviour {
         //AudioSourceAtmo.loop = true;
         //AudioSourceAtmo.volume = 0.5f;
 
+        StartCoroutine(FadeIn());
         Debug.Log(audioSource.clip.name);
         Debug.Log(menuBackgroundMusic.name);
     }
@@ -89,6 +90,7 @@ void OnDisable()
    
     void OnLevelFinishedLoading(Scene scene, LoadSceneMode mode)
 {
+        audioSource = gameObject.GetComponent<AudioSource>();
         if (scene.name == "Level1")
         {
 
@@ -100,15 +102,16 @@ void OnDisable()
         }
         else
         {
-            if (audioSource.clip.name != menuBackgroundMusic.name)
+          //  if (audioSource.clip.name != menuBackgroundMusic.name)
             {
+                Debug.Log(menuBackgroundMusic.name);
              audioSource.clip = menuBackgroundMusic;
             }
-
+            StartCoroutine(FadeIn());
 
         }
 
-
+     
 
 
     Debug.Log("Level Loaded");
@@ -116,7 +119,15 @@ void OnDisable()
     Debug.Log(mode);
 }
 
+    IEnumerator FadeIn()
+    {
+        for (float i = 0; i <= 1; i += 0.01f)
+        {
+            audioSource.volume = i;
+            yield return null;
+        }
+    }
 
-    
-	
+
+
 }

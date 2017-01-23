@@ -25,16 +25,16 @@ public class MissileEnemy : MonoBehaviour
 	{
 		AudioSource audio = GetComponent<AudioSource>();
 		lowPass = GetComponent<AudioLowPassFilter>();
-		var idx = UnityEngine.Random.Range(-2.0f, 1.0f);
-		audio.pitch = 1;// idx;
+		var idx = UnityEngine.Random.Range(-3.0f, 1.0f);
+		audio.pitch = idx;
 		audio.Play();
 		explosion = Instantiate(explosionPrefab) as GameObject;
 		explosion.transform.parent = gameObject.transform;
 		explosion.transform.localPosition = new Vector3(0, 0, 0);
 		explosion.SetActive(false);
 		initialPosition = gameObject.transform.position;
-
-		lowPass.lowpassResonanceQ = 2.0f;
+        lowPass.cutoffFrequency = 22000;
+		lowPass.lowpassResonanceQ = 5.0f;
 
 		smoke = GetComponentInChildren<ParticleSystem>();
 	}
@@ -58,8 +58,8 @@ public class MissileEnemy : MonoBehaviour
 				gameObject.transform.GetChild(0).transform.rotation = Quaternion.LookRotation(-translation);
 			}	
 			gameObject.transform.Translate(translation * speed * Time.deltaTime);
-
-			lowPass.cutoffFrequency = Mathf.Lerp(0, 22000, 1 - (position - targetPosition).magnitude / (initialPosition - targetPosition).magnitude);
+            Debug.Log(lowPass.cutoffFrequency);
+			lowPass.cutoffFrequency = Mathf.Lerp(2000, 22000,  (position - targetPosition).magnitude / (initialPosition - targetPosition).magnitude);
 			
 		}
 		if (smoke)
@@ -96,7 +96,7 @@ public class MissileEnemy : MonoBehaviour
 			gameObject.transform.position = position;
 
 			lowPass.cutoffFrequency = Mathf.Lerp(22000, 0, currentDistance / initialDistance);
-			Debug.Log(lowPass.cutoffFrequency);
+			//Debug.Log(lowPass.cutoffFrequency);
 			//Debug.Log(Vector3.Distance(position, targetPosition));
 			currentDistance = Vector3.Distance(position, targetPosition);
 			yield return null;
