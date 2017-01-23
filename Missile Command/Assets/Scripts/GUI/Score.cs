@@ -4,12 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Score : MonoBehaviour {
-    private int scoreText;
+    private string scoreText;
     private Text guiText;
    
     // Use this for initialization
     void Start () {
-        scoreText = GameManager.Instance.getScore();
+        scoreText =""+ GameManager.Instance.getScore();
+        gameObject.GetComponent<Text>().text = scoreText;
         var guiText = gameObject.GetComponent<Text>();
     }
 	
@@ -17,9 +18,9 @@ public class Score : MonoBehaviour {
 	void Update () {
         if (GameManager.Instance.hasScoreChanged())
         {
-            scoreText = GameManager.Instance.getScore();
+            scoreText =""+ GameManager.Instance.getScore();
 
-            gameObject.GetComponent<Text>().text = "" + scoreText;
+            gameObject.GetComponent<Text>().text =  scoreText;
         }
     }
 }

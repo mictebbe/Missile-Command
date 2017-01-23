@@ -50,6 +50,7 @@ public class City : MonoBehaviour {
 		}
         if (!GameManager.Instance.isCityDestroyed(this.gameObject))
         {
+            GameObject.Find("MissileSpawnerEnemy").GetComponent<MissileSpawnerEnemy>().removeTarget(gameObject);
             GameManager.Instance.destroyCity(gameObject);
             // Change model to destroyed building
             gameObject.transform.GetChild(0).gameObject.SetActive(false);
@@ -75,7 +76,7 @@ public class City : MonoBehaviour {
     IEnumerator levelStartLights()
     {
        
-        for (int j = 0; j < 2; j++) {
+        for (int j = 0; j < 3; j++) {
             levelStartLight.enabled = true;
             for (float i = 0.0f; i < 8; i += 1.5f)
             {
@@ -95,4 +96,6 @@ public class City : MonoBehaviour {
 
 
     }
+
+    
 }

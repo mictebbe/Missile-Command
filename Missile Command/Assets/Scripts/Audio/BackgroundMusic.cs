@@ -48,21 +48,23 @@ public class BackgroundMusic : MonoBehaviour {
         
 
         //Sets this to not be destroyed when reloading scene
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(transform.gameObject);
 
         //Call the InitGame function to initialize the first level 
         
     }
+    
     // Use this for initialization
     void Start () {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
         //gameObject.AddComponent<AudioSource>();
-        
-       
-       
-        audioSource.playOnAwake = true;
+
+
+
+        //audioSource.playOnAwake = true;
         audioSource.clip = menuBackgroundMusic;
         audioSource.loop = true;
+        audioSource.priority = 0;
         audioSource.volume = 1f;
 
         //AudioSourceAtmo = sounds[1];
@@ -71,8 +73,8 @@ public class BackgroundMusic : MonoBehaviour {
         //AudioSourceAtmo.volume = 0.5f;
 
         StartCoroutine(FadeIn());
-        Debug.Log(audioSource.clip.name);
-        Debug.Log(menuBackgroundMusic.name);
+       
+        audioSource.Play();
     }
 
      
@@ -93,35 +95,40 @@ void OnDisable()
         audioSource = gameObject.GetComponent<AudioSource>();
         if (scene.name == "Level1")
         {
-
-            //AudioSourceAtmo.Play();
+            
+            
+         
             if (audioSource.clip.name != levelBackgroundMusic.name)
             {
+                Debug.Log("Level 1 Audio");
                 audioSource.clip = levelBackgroundMusic;
+                audioSource.Play();
+                StartCoroutine(FadeIn());
             }
         }
         else
         {
-          //  if (audioSource.clip.name != menuBackgroundMusic.name)
+            if (audioSource.clip.name != menuBackgroundMusic.name)
             {
-                Debug.Log(menuBackgroundMusic.name);
+               
              audioSource.clip = menuBackgroundMusic;
+                 
+                StartCoroutine(FadeIn());
             }
-            StartCoroutine(FadeIn());
+            
 
         }
 
      
 
 
-    Debug.Log("Level Loaded");
-    Debug.Log(scene.name);
-    Debug.Log(mode);
+   
 }
 
     IEnumerator FadeIn()
     {
-        for (float i = 0; i <= 1; i += 0.01f)
+        audioSource.Play();
+        for (float i = 0; i <= 0.6; i += 0.006f)
         {
             audioSource.volume = i;
             yield return null;

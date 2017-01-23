@@ -19,30 +19,34 @@ public class MissileEnemy : MonoBehaviour
 	private GameObject explosion;
 	private bool moving = true;
 	AudioLowPassFilter lowPass;
-	Vector3 initialPosition;
+    AudioSource audioSource;
+
+    Vector3 initialPosition;
 	// Use this for initialization
 	void Start()
 	{
-		AudioSource audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 		lowPass = GetComponent<AudioLowPassFilter>();
 		var idx = UnityEngine.Random.Range(-3.0f, 1.0f);
-		audio.pitch = idx;
-		audio.Play();
+        //audioSource.pitch = idx;
+		
 		explosion = Instantiate(explosionPrefab) as GameObject;
 		explosion.transform.parent = gameObject.transform;
 		explosion.transform.localPosition = new Vector3(0, 0, 0);
 		explosion.SetActive(false);
 		initialPosition = gameObject.transform.position;
-        lowPass.cutoffFrequency = 22000;
-		lowPass.lowpassResonanceQ = 5.0f;
+        lowPass.cutoffFrequency = 0;
+		lowPass.lowpassResonanceQ = 0.2f;
 
 		smoke = GetComponentInChildren<ParticleSystem>();
-	}
+        audioSource.Play();
+    }
 
 	void Update()
 	{
 		if (moving)
 		{
+
 			var position = gameObject.transform.position;
 			var distance = Vector3.Distance(position, targetPosition);
 			if (distance > 10.0f)
@@ -58,10 +62,13 @@ public class MissileEnemy : MonoBehaviour
 				gameObject.transform.GetChild(0).transform.rotation = Quaternion.LookRotation(-translation);
 			}	
 			gameObject.transform.Translate(translation * speed * Time.deltaTime);
-            Debug.Log(lowPass.cutoffFrequency);
-			lowPass.cutoffFrequency = Mathf.Lerp(2000, 22000,  (position - targetPosition).magnitude / (initialPosition - targetPosition).magnitude);
+            //Debug.Log(lowPass.cutoffFrequency);
 			
-		}
+            var lerpValue = (position - targetPosition).magnitude / (initialPosition - targetPosition).magnitude;
+            //Debug.Log(lerpValue);
+            sweepAudio(lerpValue, position.x);
+
+        }
 		if (smoke)
 		{
 			if (!smoke.IsAlive())
@@ -95,7 +102,13 @@ public class MissileEnemy : MonoBehaviour
 			position = Vector3.MoveTowards(position + (modDirection * noise), targetPosition, speed * Time.deltaTime);
 			gameObject.transform.position = position;
 
-			lowPass.cutoffFrequency = Mathf.Lerp(22000, 0, currentDistance / initialDistance);
+            //sweepAudio(currentDistance / initialDistance);
+
+
+            
+
+            //var lerpValue= ;
+            lowPass.cutoffFrequency = Mathf.Lerp(22000, 0, 1);
 			//Debug.Log(lowPass.cutoffFrequency);
 			//Debug.Log(Vector3.Distance(position, targetPosition));
 			currentDistance = Vector3.Distance(position, targetPosition);
@@ -119,6 +132,7 @@ public class MissileEnemy : MonoBehaviour
 	{
 		moving = false;
 		explosion.SetActive(true);
+        audioSource.Stop();
 		gameObject.transform.GetChild(0).gameObject.SetActive(false); // disable missile
 	}
 
@@ -133,5 +147,19 @@ public class MissileEnemy : MonoBehaviour
 		}
 
 	}
+
+    void sweepAudio(float lerpValue, float xValue)
+    {
+       
+    lowPass.cutoffFrequency = Mathf.Lerp(0, 22000,(lerpValue* lerpValue * lerpValue * lerpValue));
+        audioSource.volume = 1-(lerpValue );
+   
+    }
+
+    // c#
+    float map(float s, float a1, float a2, float b1, float b2)
+    {
+        return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
+    }
 
 }

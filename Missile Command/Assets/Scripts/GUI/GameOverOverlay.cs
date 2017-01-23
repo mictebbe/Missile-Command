@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameOverOverlay : MonoBehaviour {
     Text canvas;
-   
+    AudioSource endSound;
     public RawImage blendPlane;
     int drawDepth = -1000;
     float alpha = 1;
@@ -13,6 +13,7 @@ public class GameOverOverlay : MonoBehaviour {
     Color ColorB = new Color(0, 0, 0, 1);
     // Use this for initialization
     void Start () {
+        endSound = gameObject.GetComponent<AudioSource>();
         canvas = gameObject.GetComponent<Text>();
         canvas.enabled=false;
     }
@@ -32,9 +33,10 @@ public class GameOverOverlay : MonoBehaviour {
     //called by End Game Button
     IEnumerator endGame()
     {
+        endSound.Play();
         canvas.enabled = true;
         //blend();
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(5);
 
         LevelGenerator.Instance.showEndScreen();
     }

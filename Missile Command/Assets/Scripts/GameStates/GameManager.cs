@@ -114,10 +114,11 @@ public class GameManager : MonoBehaviour
 	// ---------------------------------------------------------------------------------------------------
 	public void startNewGame()
 	{
+        Debug.Log("Starting new game");
 		gameEnded = false;
 		
 		resetMissiles();
-
+        rebuildHouses();
 		activeLevel = 1;                
 		score = 0;
 
@@ -156,6 +157,19 @@ public class GameManager : MonoBehaviour
         
         citiesDestroyed[idx] = true;
 	}
+
+    public void rebuildHouses()
+    {
+        Debug.Log(citiesDestroyed);
+        var templist = new List<bool>();
+        
+        foreach (bool current in citiesDestroyed)
+        {
+            templist.Add(false);
+            
+        }
+        citiesDestroyed = templist;
+    }
 
 	public bool isCityDestroyed(GameObject cityToDestroy)
 	{
@@ -284,6 +298,7 @@ public class GameManager : MonoBehaviour
 		if (!gameEnded)
 		{
 			gameEnded = true;
+
 			//LevelGenerator.Instance.showEndScreen();
 		}
 	}

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MissileSpawnerEnemy : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class MissileSpawnerEnemy : MonoBehaviour
     private float timeUntilShot = 0;
 
     private Stack missiles = new Stack();
-	private ArrayList targets = new ArrayList();
+	private List<GameObject> targets = new List<GameObject>();
 	
 	// Use this for initialization
 	void Start ()
@@ -24,7 +25,11 @@ public class MissileSpawnerEnemy : MonoBehaviour
 		for (var i = 0; i < cities.childCount; ++i)
 		{
 			GameObject city = cities.GetChild(i).gameObject;
-			targets.Add(city);
+            if(!GameManager.Instance.isCityDestroyed(city)){
+
+                targets.Add(city);
+
+            }
 		}
 
 		var missileLauncher = GameObject.Find("MissileLauncher").transform;
@@ -71,10 +76,12 @@ public class MissileSpawnerEnemy : MonoBehaviour
 
 	public void removeTarget(GameObject target)
 	{
-		if (targets.Contains(target))
+		//if (targets.Contains(target))
 		{
-			targets.Remove(target);
-		}
+           
+            targets.Remove(target);
+            Debug.Log(targets.Count);
+        }
 	}
 
     public void changeTimeUntilShot()
@@ -104,4 +111,6 @@ public class MissileSpawnerEnemy : MonoBehaviour
         
 
     }
+
+
 }

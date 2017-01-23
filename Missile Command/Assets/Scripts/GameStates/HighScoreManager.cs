@@ -128,6 +128,21 @@ public class HighScoreManager : MonoBehaviour
     {
         PlayerPrefs.Save();
     }
+
+    public bool isInHighscore(int inputScore)
+    {
+        foreach(Scores current in GetHighScore())
+        {
+
+            if (inputScore > current.score)
+            {
+                return true;
+
+            }
+        }
+        return false;
+
+    }
 }
 
 public class Scores

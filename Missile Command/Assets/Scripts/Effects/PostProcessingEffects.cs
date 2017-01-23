@@ -6,7 +6,7 @@ public class PostProcessingEffects : MonoBehaviour {
     float SkyboxSpeed = 100f;
     // Use this for initialization
     void Start () {
-       //StartCoroutine(TweakBloomThreshold());
+       StartCoroutine(TweakBloomThreshold());
         //StartCoroutine(TweakSkyboxRotation());
     }
 	

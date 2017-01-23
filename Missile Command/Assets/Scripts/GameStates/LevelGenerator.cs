@@ -53,7 +53,17 @@ public class LevelGenerator : MonoBehaviour {
 
     public void showEndScreen()
     {
-        SceneManager.LoadScene("EndScreen");
+        
+        if (HighScoreManager.Instance.isInHighscore(GameManager.Instance.getScore()))
+        {
+            SceneManager.LoadScene("EndScreen");
+
+
+        }
+        else
+        {
+            showHighscores();
+        }
 
     }
 

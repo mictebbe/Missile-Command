@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 public class MissileSpawnerFriendly : MonoBehaviour
 {
-	public GameObject missilePrefab;
+    public GameObject missilesLeftText;
+    public GameObject missilePrefab;
 	public GameObject explosionPrefab;
 	public GameObject selfExplosion;
 	public AudioClip launchSound1;
@@ -19,10 +21,11 @@ public class MissileSpawnerFriendly : MonoBehaviour
 
 	List<AudioClip> sounds = new List<AudioClip>();
 
-
 	AudioSource audio;
 
-	public UnityEngine.KeyCode buttonNumber = KeyCode.A;
+    
+
+    public UnityEngine.KeyCode buttonNumber = KeyCode.A;
 	public GameObject cursor;
 
 	private Vector3 target;
@@ -32,10 +35,16 @@ public class MissileSpawnerFriendly : MonoBehaviour
 	private Transform missileStart;
 
 	private Stack missiles = new Stack();
+   
+
 
 	void Start()
 	{
-		audio = GetComponent<AudioSource>();
+        
+
+        audio = GetComponent<AudioSource>();
+        audio.enabled = true;
+        audio.volume = 0.3f;
 		sounds.Add(launchSound1);
 		sounds.Add(launchSound2);
 		sounds.Add(launchSound3);
@@ -64,13 +73,15 @@ public class MissileSpawnerFriendly : MonoBehaviour
 
 			missileScript.transform.position = transform.position;
 			missileScript.speed = speed;
-			missileScript.noiseAmp = 2.5f;
+			missileScript.noiseAmp = 3.0f;
 			missileScript.noiseScale = 0.010f;
 
 			missile.SetActive(false);
 			missiles.Push(missile);
+            
 		}
-	}
+        missilesLeftText.GetComponent<Text>().text = ""+missiles.Count;
+    }
 
 
 	void Update()
@@ -88,7 +99,10 @@ public class MissileSpawnerFriendly : MonoBehaviour
 				var idx = Mathf.FloorToInt(UnityEngine.Random.Range(0, 4.99f));
 				audio.clip = sounds[idx];
 				audio.Play();
-			}
+
+                missilesLeftText.GetComponent<Text>().text = "" + missiles.Count; 
+
+            }
 			else
 			{
 				var idx = Mathf.FloorToInt(UnityEngine.Random.Range(5, 6.99f));
