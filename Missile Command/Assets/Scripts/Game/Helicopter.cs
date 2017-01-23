@@ -1,77 +1,79 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Helicopter : MonoBehaviour {
-    public GameObject ExplosionPrefab;
-    private GameObject explosion;
-    private Vector3 startPos;
+public class Helicopter : MonoBehaviour
+{
+	public GameObject ExplosionPrefab;
+	private GameObject explosion;
+	private Vector3 startPos;
 	private float speed = 1.0f;
-    private bool flying=false;
-    private float startTime = 0;
+	private bool flying = false;
+	private float startTime = 0;
 	// Use this for initialization
-	void Start () {
+	void Start()
+	{
 
-        explosion = Instantiate(ExplosionPrefab) as GameObject;
-        explosion.transform.localPosition = gameObject.transform.localPosition;
-        explosion.SetActive(false);
-        startPos = transform.position;
+		explosion = Instantiate(ExplosionPrefab) as GameObject;
+		explosion.transform.localPosition = gameObject.transform.localPosition;
+		explosion.SetActive(false);
+		startPos = transform.position;
 
 		AudioSource audio = GetComponent<AudioSource>();
+
+
+		startTime = Random.Range(0, 5);
+
+		flying = true;
 		audio.Play();
 
-        startTime = Random.Range(0, 5);
-
-        if (GameManager.Instance.getLevel() % 5 == 0)
-        {
-            flying = true;
-
-        }
+		if (GameManager.Instance.getLevel() % 5 == 0)
+		{
+			flying = true;
+			audio.Play();
+		}
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
+	void Update()
+	{
+		StartCoroutine(Fly());
+	}
 
-        StartCoroutine(Fly());
+	public void Explode()
+	{
+		if (explosion != null)
+		{
+			explosion.transform.position = gameObject.transform.position;
+		}
+		explosion.SetActive(true);
+		Debug.Log("Heli hit!");
+		Destroy(gameObject);
 
-      
+	}
 
-    }
+	IEnumerator Fly()
+	{
 
-    public void Explode()
-    {
-        if (explosion != null)
-        {
-            explosion.transform.position= gameObject.transform.position;
-        }
-        explosion.SetActive(true);
-        Debug.Log("Heli hit!");
-        Destroy(gameObject);
 
-    }
+		yield return new WaitForSeconds(startTime);
+		while (flying)
+		{
+			transform.position += transform.forward * (-0.5f) * Time.deltaTime;
 
-    IEnumerator Fly()
-    {
+			var noise = 0.001f * (Mathf.PerlinNoise(Time.time * 0.12f, 0) - 0.5f);
+			transform.Rotate(new Vector3(0, 0, noise));
 
-        yield return new WaitForSeconds(startTime);
-        while (flying)
-        {
-            //Debug.Log("Flying");
-            transform.position += transform.forward * (-0.2f)*Time.deltaTime;
+			transform.Find("main_rotor").transform.Rotate(new Vector3(0, 0, 15));
 
-            var noise = 0.2f * (Mathf.PerlinNoise(Time.time * 0.3f, 0) - 0.5f);
-            transform.Rotate(new Vector3(0, 0, noise));
+			if (transform.position.x > 400.0)
+			{
+				transform.position = startPos;
+				this.enabled = false;
+				flying = false;
+			}
+			yield return null;
 
-            transform.Find("main_rotor").transform.Rotate(new Vector3(0, 0, 15));
+		}
 
-            if (transform.position.x > 400.0)
-            {
-                transform.position = startPos;
-                this.enabled = false;
-                flying = false;
-            }
-            yield return null;
-
-        }
-
-    }
+	}
 }

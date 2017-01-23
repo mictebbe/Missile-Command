@@ -64,7 +64,7 @@ public class MissileSpawnerFriendly : MonoBehaviour
 
 			missileScript.transform.position = transform.position;
 			missileScript.speed = speed;
-			missileScript.noiseAmp = 3.0f;
+			missileScript.noiseAmp = 2.5f;
 			missileScript.noiseScale = 0.010f;
 
 			missile.SetActive(false);
